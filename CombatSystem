@@ -1,1 +1,138 @@
 //File for the Combat System class
+
+//============================================================================
+// Name        : CombatSystem.cpp
+// Author      : Aaron Gaskin
+// Description : Combat System method, will take in a character and monster object.
+//				       Then it will take in player choice as the character fights the monster.
+//============================================================================
+
+#include <iostream>
+#include <string>
+#include <sstream>		//imports the stringstream function
+#include <cctype>		//imports the isspace() function
+using namespace std;
+
+/******************
+ * Name: intCheck
+ * Needs: string
+ * Outputs: int
+ * Purpose: checks a string of user input to verify that it is an integer
+ ******************/
+int intCheck(string userChoice)
+{
+	//initializing variables for later use
+	bool check = true;
+	int x = 0;
+
+	//loop that checks the users choice is an int
+	do
+	{
+		//parsing input string to determine if it's an int
+		//copied from my pa1.cpp assignment
+		//obtained from stack Overflow "Check if the input is a number or string in C++"
+		stringstream userParse(userChoice);
+
+		//checking if the parse can be put into an int
+		if(!(userParse >> x).fail())
+		{
+			userParse >> x;			//passing parse value to x
+			check = false;
+		}
+		else			//if parse test fails, asks user for an integer
+		{
+			cout << "Invalid input!" << "\n" << "Please enter a valid integer: ";
+			cin >> userChoice;
+		}
+	}while(check);
+
+	//return valid integer
+	return x;
+}
+
+bool combatSystem(int charHealth, int charMana, int charDamage, int charDefense, int monHealth, int monDamage, int monDefense, string monName)
+{
+	//initialize variables
+	string choice = "";
+	int intChoice = 0;
+
+	//setting damage values
+	int charAttack = charDamage - monDefense;
+	if(charAttack <= 0)		//ensuring the player deals at least 1 damage
+	{
+		charAttack = 1;
+	}
+	int monAttack = monDamage - charDefense;
+	if(monAttack <= 0)		//ensuring monster deals at least 1 damage
+	{
+		monAttack = 1;
+	}
+	while(true)
+	{
+		//outputs info to user
+		cout << "You have " << charHealth << " HP and " << charDamage << " attack." <<endl;
+		cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
+
+		//ask for user's choice
+		cout << "What would you like to do?\n";
+		cout << "1.) Basic Attack\t2.) Use Skill\t3.) Use Item" << endl;
+		cin >> choice;
+		//verify that it is an integer
+		intChoice = intCheck(choice);
+
+		//perform action based on user choice
+		switch(intChoice)
+		{
+			case 1: cout << "You strike the " << monName << " It takes " << charAttack << " damage." << endl;
+					monHealth = monHealth - charAttack;
+					cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+					charHealth = charHealth - monAttack;
+					break;
+			case 2:
+					break;
+			case 3:
+					break;
+			default: cout << "Invalid choice!" << endl;
+		}
+
+		//check if either player or monster is dead
+		if(monHealth <= 0)		//check monster health first because player hits first
+		{
+			return true;
+		}
+		else if(charHealth <= 0)		//then check player health
+		{
+			return false;
+		}
+	}
+}
+
+
+int main() {
+	//character stats
+	int charHealth = 20;
+	int charMana = 10;
+	int charDamage = 4;
+	int charDefense = 3;
+
+	//monster stats
+	int monHealth = 10;
+	int monDamage = 1;
+	int monDefense = 1;
+	string monName = "Goblin";
+
+	//if true then player killed monster, if false then player died
+	if(combatSystem(charHealth, charMana, charDamage, charDefense, monHealth, monDamage, monDefense, monName))
+	{
+		cout << "HAZZAH! You have slain the beast!" << endl;
+	}
+	else
+	{
+		cout << "Alas, your journey has come to a rather unfortunate end.\n";
+		cout << "The dungeon proves too strong for yet another adventurer." << endl;
+	}
+
+	return 0;
+}
+
+
