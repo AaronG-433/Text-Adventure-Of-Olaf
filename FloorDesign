@@ -1,1 +1,138 @@
 //File for the floor design class
+
+/*Notes for main: should create a floor for each level and then call the method "floor.run"
+  *this method will take care of everything, and will return true if the floor is completed and false otherwise.
+  */
+
+#include <cstdlib>
+#include <iostream>
+using namespace::std;
+
+class Floor {
+public:
+	int level;
+	//Character hero;
+
+private:
+	Floor(int level);
+	bool run();
+	void runShop();
+	void runStairs();
+	bool runMonster();
+	void runLoot();
+	void runNothing();
+	bool runBoss();
+
+};
+
+//Will also take the character (And store?) as a parameter
+Floor::Floor(int level) {
+	this->level = level;
+	//this->hero = hero;
+
+}
+
+bool Floor::run() {
+	bool fail = false;
+	int outcome = 0;
+	//int loot = 0;
+	if(this->runShop()) {
+		if(level < 5) {
+			for(int i=0; i<level*2; i++) {
+				outcome = rand()%10;
+				if(outcome >= 0 && outcome < 5) {
+					if(!this->runMonster()) {
+						fail = true;
+						return false;
+						break;
+					}
+
+				} else if(outcome >= 5 && outcome < 9) {
+					this->runLoot();
+				} else if(outcome == 9) {
+					this->runNothing();
+				}
+			}
+			if(!fail) {
+				this->runStairs();
+			}
+		} else if(level == 5) {
+			if(!this->runBoss()) {
+				return false;
+			}
+
+		}
+	} else {
+		return false;
+	}
+
+	return true;
+
+}
+
+void Floor::runShop() {
+	//call store class
+}
+
+void Floor::runStairs() {
+	cout << "Congratulations! You have completed floor " << level
+			<< "! Beware, even greater dangers lie ahead." << endl;
+	if(this->level == 4) {
+		cout << "You'd best prepare yourself, for your greatest challenge lies below" << endl;
+	}
+}
+
+bool runMonster() {
+	//Monster monst = Monster();
+	cout << "A " << ""
+			<< " has appeared! It moves to attack you.  Defend yourself!" << endl;
+	//Launch combat system
+
+	//If Victory
+	cout << "You have defeated the monster! Most impressive." << endl;
+	cout << "You find " << "" << " loot on the monster's corpse.  Well earned." << endl;
+	cout << "You move on with " << "" << " health and " << "" << " mana." << endl;
+
+	//If fail
+	cout << "You have been killed.  The monster feeds on your lifeless corpse..." << endl;
+	//return false;
+
+	return true;
+}
+
+void Floor::runLoot() {
+	int loot = (rand()%20) + 1;
+	cout << "You cautiously enter the room, but only find a simple unassuming chest. "
+			<< "You open the chest to find " << loot << " gold coins! "
+					 << "You take it and run" << endl;
+	//Store loot
+
+}
+
+void Floor::runNothing() {
+	cout << "You bust down the door ready to fight!" << endl;
+	cout << "....\n...\nBut nothing happens?" << endl;
+	cout << "You continue on, confused and slightly disappointed." << endl;
+
+}
+
+bool Floor::runBoss() {
+	//Boss boss = boss();
+	cout << "You crack open the door and peak through, seeing only darkness." << endl;
+	cout << "Suddenly, the door is pulled open, and you are pulled into the chamber and thrown against the opposite wall!" >> endl;
+	cout << "Fire erupts along the walls, revealing a demon beyond description blocking the only entrance." << endl;
+	cout << "Shaken, you raise your weapon and prepare for the fight of your life." << endl;
+	cout << "...Good luck.  You'll need it." << endl;
+
+	//run combat
+	//If Victory (lol)
+	cout << "You have apparently hacked the game.  Well done I suppose.  Take you loot and get out." << endl;
+	//return true
+
+	//When failure
+	cout << "After a heroic but futile effort, you lie before the demon in defeat." << endl;
+	cout << "The beast makes a disturbing guttural sound that could be a laugh or cheer." << endl;
+	cout << "You vision goes dark as your life fades, and you lay defeated at the foot of the monster, thankful for the release of death." << endl;
+	//return false;
+
+}
