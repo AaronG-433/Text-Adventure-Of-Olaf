@@ -1,1 +1,543 @@
 //File for the character creation class
+#include <iostream>
+#include <string>
+using namespace std;
+class Player
+{
+//Any accessor methods, as well as the player constructor are here
+	public:
+
+		//General stats not depending on class
+		virtual int getHealth() = 0;
+		virtual void setHealth(int hp) = 0;
+		virtual int getMaxHP() = 0;
+		virtual void lvlUp() = 0;
+		virtual string getClass();
+		virtual string getName() = 0;
+		virtual int getLvl() = 0;
+    virtual int getDmg() = 0;
+    virtual int getDef() = 0;
+    virtual int getCurMana() = 0;
+    virtual void setCurMana(int mana) = 0;
+    virtual int getMaxMana() = 0;
+    virtual void setLvl(int lvl) = 0;
+  protected:
+    Player (int maxHP, int lvl, int maxMana, string name)
+    {
+    this -> maxHP = maxHP;
+    this -> lvl = lvl;
+    this -> maxMana = maxMana;
+    cout << "What is the name of your character" << endl;
+    cin >> this -> name;
+    }
+
+	//These are the general player states
+
+		int curHP = 20;
+		int maxHP = 20;
+		int lvl = 1;
+		int curMana = 10;
+		int mana = 10;
+		string name;
+    int maxMana = 10;
+
+};
+
+/*
+The knight subclass
+Tip:If you try and use a skill you cannot actually use because of lack of mana/level, it return's -1, so check for that in combat
+*/
+class Knight : public Player
+{
+
+
+	//Define a bunch of extra skill methods and stats
+	private:
+		int dmg;
+		int def;
+    string className;
+
+	public:
+			//skills
+			int styleishSpin();
+			int shieldBash();
+			int demacianJudgement();
+			int foolishCourage();
+      //inheritance
+      int getHealth();
+  		void setHealth(int hp);
+  		int getMaxHP();
+  	  void lvlUp();
+  		string getName();
+  		int getLvl();
+      void setLvl(int lvl);
+      string getClass();
+      int getDmg();
+      int getDef();
+      int getCurMana();
+      int getMaxMana();
+      void setCurMana(int mana);
+      //Constructor for subclass knight
+		Knight(int maxHP, int lvl, int maxMana, string name, int dmg, int def, string className): Player(maxHP,lvl, maxMana,name)
+		{
+			dmg = 1;
+			def = 2;
+      className = "Knight";
+		}
+
+};
+
+//Defining the methods inherited from the abstract Player class
+int Knight::getDmg()
+{
+  return this->dmg;
+}
+int Knight::getDef()
+{
+  return this->def;
+}
+int Knight::getCurMana()
+{
+  return this->curMana;
+}
+void Knight::setCurMana(int mana)
+{
+  this->curMana = mana;
+}
+int Knight::getMaxMana()
+{
+  return this->maxMana;
+}
+int Knight::getLvl()
+{
+  return this->lvl;
+}
+string Knight::getName()
+{
+  return this->name;
+}
+void Knight::setLvl(int lvl)
+{
+  (this->lvl) = lvl;
+}
+void Knight::lvlUp()
+{
+  this->setLvl(this->getLvl()+1);
+}
+int Knight::getHealth()
+{
+  return this->curHP;
+}
+void Knight::setHealth(int health)
+{
+  this->curHP = health;
+}
+int Knight::getMaxHP()
+{
+  return this->maxHP;
+}
+string Knight::getClass()
+{
+  return className;
+}
+
+//Skill: returns an int for now, can become its own algorithm though
+int Knight::styleishSpin()
+{
+  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 2;
+	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+int Knight::shieldBash()
+{
+  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 4;
+	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+int Knight::demacianJudgement()
+{
+  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 6;
+     return 4 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+//The one hit K-O
+int Knight::foolishCourage()
+{
+  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 8;
+	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+
+
+/*
+The knight subclass
+Tip:If you try and use a skill you cannot actually use because of lack of mana/level, it return's -1, so check for that in combat
+*/
+class Archer : public Player
+{
+
+
+	//Define a bunch of extra skill methods and stats
+	private:
+		int dmg;
+		int def;
+    string className;
+
+	public:
+			//skills
+      int snipe();
+  		int luckyShot();
+  		int hailMary();
+  		int oneInAMillion();
+      //inheritance
+      int getHealth();
+  		void setHealth(int hp);
+  		int getMaxHP();
+  	  void lvlUp();
+  		string getName();
+  		int getLvl();
+      void setLvl(int lvl);
+      string getClass();
+      int getDmg();
+      int getDef();
+      int getCurMana();
+      int getMaxMana();
+      void setCurMana(int mana);
+      //Constructor for subclass knight
+		Archer(int maxHP, int lvl, int maxMana, string name, int dmg, int def, string className): Player(maxHP,lvl, maxMana,name)
+		{
+			dmg = 1;
+			def = 1;
+      className = "Archer";
+		}
+
+};
+
+//Defining the methods inherited from the abstract Player class
+int Archer::getDmg()
+{
+  return this->dmg;
+}
+int Archer::getDef()
+{
+  return this->def;
+}
+int Archer::getCurMana()
+{
+  return this->curMana;
+}
+void Archer::setCurMana(int mana)
+{
+  this->curMana = mana;
+}
+int Archer::getMaxMana()
+{
+  return this->maxMana;
+}
+int Archer::getLvl()
+{
+  return this->lvl;
+}
+string Archer::getName()
+{
+  return this->name;
+}
+void Archer::setLvl(int lvl)
+{
+  (this->lvl) = lvl;
+}
+void Archer::lvlUp()
+{
+  this->setLvl(this->getLvl()+1);
+}
+int Archer::getHealth()
+{
+  return this->curHP;
+}
+void Archer::setHealth(int health)
+{
+  this->curHP = health;
+}
+int Archer::getMaxHP()
+{
+  return this->maxHP;
+}
+string Archer::getClass()
+{
+  return className;
+}
+
+//Skill: returns an int for now, can become its own algorithm though
+int Archer::snipe()
+{
+  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 2;
+	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+int Archer::luckyShot()
+{
+  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 4;
+	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+int Archer::hailMary()
+{
+  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 6;
+     return 4 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+//The one hit K-O
+int Archer::oneInAMillion()
+{
+  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 8;
+	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+
+/*
+The knight subclass
+Tip:If you try and use a skill you cannot actually use because of lack of mana/level, it return's -1, so check for that in combat
+*/
+class Caster : public Player
+{
+
+
+	//Define a bunch of extra skill methods and stats
+	private:
+		int dmg;
+		int def;
+    string className;
+
+	public:
+			//skills
+      int balefulStrike();
+  		int darkMatter();
+  		int eventHorizon();
+  		int primordialBurst();
+      //inheritance
+      int getHealth();
+  		void setHealth(int hp);
+  		int getMaxHP();
+  	  void lvlUp();
+  		string getName();
+  		int getLvl();
+      void setLvl(int lvl);
+      string getClass();
+      int getDmg();
+      int getDef();
+      int getCurMana();
+      int getMaxMana();
+      void setCurMana(int mana);
+      //Constructor for subclass knight
+		Caster(int maxHP, int lvl, int maxMana, string name, int dmg, int def, string className): Player(maxHP,lvl, maxMana,name)
+		{
+			dmg = 2;
+			def = 1;
+      className = "Caster";
+		}
+
+};
+
+//Defining the methods inherited from the abstract Player class
+int Caster::getDmg()
+{
+  return this->dmg;
+}
+int Caster::getDef()
+{
+  return this->def;
+}
+int Caster::getCurMana()
+{
+  return this->curMana;
+}
+void Caster::setCurMana(int mana)
+{
+  this->curMana = mana;
+}
+int Caster::getMaxMana()
+{
+  return this->maxMana;
+}
+int Caster::getLvl()
+{
+  return this->lvl;
+}
+string Caster::getName()
+{
+  return this->name;
+}
+void Caster::setLvl(int lvl)
+{
+  (this->lvl) = lvl;
+}
+void Caster::lvlUp()
+{
+  this->setLvl(this->getLvl()+1);
+}
+int Caster::getHealth()
+{
+  return this->curHP;
+}
+void Caster::setHealth(int health)
+{
+  this->curHP = health;
+}
+int Caster::getMaxHP()
+{
+  return this->maxHP;
+}
+string Caster::getClass()
+{
+  return className;
+}
+
+//Skill: returns an int for now, can become its own algorithm though
+int Caster::balefulStrike()
+{
+  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 2;
+	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+int Caster::darkMatter()
+{
+  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 4;
+	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+int Caster::eventHorizon()
+{
+  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 6;
+     return 4 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+//The one hit K-O
+int Caster::primordialBurst()
+{
+  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  {
+    return -1;
+  }
+  else
+  {
+     curMana = curMana - 8;
+	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
+  }
+}
+
+
+
+
+
+//If we use this, we can turn this into selecting a class to spawn
+
+/*
+void chooseClass(Player* player, String* class)
+{
+	int classDecision = 0;
+	//Force the player to input a correct input that leads to a valid class which is set with a seperate method.
+	while((classDecision < 1) || (classDecision > 3) || (int(classDecision) != classDecision))
+	{
+		cout << "What class will you choose? Will you be a Knight[1], a Caster[2], or an Archer	[3]?" << endl;
+		cin >> 	classDecision;
+
+		switch(classDecision)
+		{
+		case 1:
+			player.setKnightClass();
+			break;
+		case 2:
+			player.setCasterClass();
+			break;
+		case 3:
+			player.setArcherClass();
+			break;
+		default:
+			cout << "Please choose one of the classes available!" << endl;
+
+
+		}
+	}
+
+
+}
+*/
+int main()
+{
+
+  cout << "Program ran" << endl;
+}
