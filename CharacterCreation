@@ -179,7 +179,6 @@ int Knight::demacianJudgement()
   }
 }
 
-//The one hit K-O
 int Knight::foolishCourage()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
@@ -332,7 +331,7 @@ int Archer::hailMary()
   }
 }
 
-//The one hit K-O
+
 int Archer::oneInAMillion()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
@@ -484,7 +483,6 @@ int Caster::eventHorizon()
   }
 }
 
-//The one hit K-O
 int Caster::primordialBurst()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
