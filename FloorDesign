@@ -175,7 +175,7 @@ bool Floor::runBoss() {
 
 	//run combat
 	//If Victory (lol)
-	cout << "You have apparently hacked the game.  Well done I suppose.  Take you loot and get out." << endl;
+	cout << "You have apparently hacked the game.  Well done I suppose.  Take your loot and get out." << endl;
 	//return true
 
 	//When failure
