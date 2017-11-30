@@ -27,9 +27,9 @@ class Player
     this -> maxHP = maxHP;
     this -> lvl = lvl;
     this -> maxMana = maxMana;
-    //cout << "What is the name of your character" << endl;
-    //cin >> this -> name;
-		this -> name = "Olaf";
+    cout << "What is the name of your character" << endl;
+    cin >> this -> name;
+		//this -> name = "Olaf";
     }
 
 	//These are the general player states
@@ -80,7 +80,7 @@ class Knight : public Player
       void setCurMana(int mana);
 			//~Knight();
       //Constructor for subclass knight
-		Knight(int maxHP, int lvl, int maxMana, string name, int dmg, int def, string className): Player(maxHP,lvl, maxMana,name)
+		Knight(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
 		{
 			dmg = 1;
 			def = 2;
@@ -233,7 +233,7 @@ class Archer : public Player
       void setCurMana(int mana);
 			//~Archer();
       //Constructor for subclass knight
-		Archer(int maxHP, int lvl, int maxMana, string name, int dmg, int def, string className): Player(maxHP,lvl, maxMana,name)
+		Archer(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
 		{
 			dmg = 1;
 			def = 1;
@@ -386,7 +386,7 @@ class Caster : public Player
       void setCurMana(int mana);
 			//~Caster();
       //Constructor for subclass knight
-		Caster(int maxHP, int lvl, int maxMana, string name, int dmg, int def, string className): Player(maxHP,lvl, maxMana,name)
+		Caster(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
 		{
 			dmg = 2;
 			def = 1;
@@ -542,4 +542,10 @@ int main()
 {
 
   cout << "Program ran" << endl;
+	Archer *archer = new Archer(10, 5, 10, "olaf");
+	cout << archer->getDmg() << endl;
+	cout << archer->luckyShot() << endl;
+	cout << archer->getCurMana() << endl;
+
+
 }
