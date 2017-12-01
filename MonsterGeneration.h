@@ -33,7 +33,6 @@ public:
 	int DAMAGE();
 	int DEFENSE();
 	int LOOT();
-	void boss();
 };
 
 //Monster Constructor
@@ -45,7 +44,30 @@ monster::monster(){
 	loot =LOOT();
 }
 
+/*
+* Boss class - general final boss of the game.
+*/
+class boss{
+private:
+	string name;
+	int hp;
+	int damage;
+	int defense;
 
-void monster::boss()
+public:
+	boss();
+	string getBOSS();
+	int getHP();
+	int getDAMAGE();
+	int getDEFENSE();
+};
+
+//Boss Constructor
+boss::boss(){
+	name ="Olaf";
+	hp =9000;
+	damage =666;
+	defense =401;
+}
+
 #endif
-
