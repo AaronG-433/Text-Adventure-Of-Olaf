@@ -1,1 +1,84 @@
 //File for the monster generation class
+#include "monster.h"
+#include "Floor.h"
+using namespace std;
+
+/*
+ *Generate a monster name.
+ *@return: monster name.
+ */
+string monster::monsterGeneration(){
+	string monsterSelection[]={"Slime","Globin","Wyvern","Mummy","Orc","Imp","Dark Phantom","Vampire","Minotaur","Skeletal"};
+	srand(time(0));
+	int numMonster = rand()%10;
+	string monsterName = monsterSelection[numMonster];
+	return monsterName;
+}
+
+/*
+ * Generate monster's hp.
+ * @return: HP of monster
+ */
+int monster::HP(){
+	srand(time(0));
+	int floorLevel = Floor.getLevel();
+	int numHP = rand()%5+floorLevel;
+	return numHP;
+}
+
+/*
+ * Generate monster's damage.
+ * @return: Damage of monster
+ */
+int monster::DAMAGE(){
+	srand(time(0));
+	int floorLevel = Floor.getLevel();
+	int numDamage = rand()%3+floorLevel;
+	return numDamage;
+}
+
+/*
+ * Generate monster's defense.
+ * @return: Defense of monster
+ */
+int monster::DEFENSE(){
+	srand(time(0));
+	int floorLevel = Floor.getLevel();
+	int numDefense = rand()%1+floorLevel;
+	return numDefense;
+}
+
+/*
+ * Generate monster's loot.
+ * @return: Loot of monster
+ */
+int monster::LOOT(){
+	srand(time(0));
+	int numLoot = rand()%10+1;
+	return numLoot;
+}
+
+/*
+ * Final Boss of the game.
+ * 
+ */
+void monster::boss(){
+	
+}
+
+/*
+ * main.cpp
+ *
+ *  Created on: Nov 30, 2017
+ *      Author: Johnny Li
+ */
+int main(){
+monster monster;
+
+
+
+	return 0;
+}
+
+
+
