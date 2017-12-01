@@ -1,60 +1,78 @@
 #include "monster.h"
 //#include "Floor.h"
 using namespace std;
+
 int floorLevel =1;
+
 /*
+ *Setters for the monster generation.
  *Generate a monster name.
  *@return: monster name.
  */
-string monster::monsterGeneration(){
+string monster::setMONSTER(){
 	string monsterSelection[]={"Slime","Globin","Wyvern","Mummy","Orc","Imp","Dark Phantom","Vampire","Minotaur","Skeletal"};
 	srand(time(0));
 	int numMonster = rand()%10;
 	string monsterName = monsterSelection[numMonster];
 	return monsterName;
 }
-
 /*
  * Generate monster's hp.
  * @return: HP of monster
  */
-int monster::HP(){
+int monster::setHP(){
 	srand(time(0));
 	//int floorLevel = Floor.getLevel();
 	int numHP = rand()%5+floorLevel;
 	return numHP;
 }
-
 /*
  * Generate monster's damage.
  * @return: Damage of monster
  */
-int monster::DAMAGE(){
+int monster::setDAMAGE(){
 	srand(time(0));
 	//int floorLevel = Floor.getLevel();
 	int numDamage = rand()%3+floorLevel;
 	return numDamage;
 }
-
 /*
  * Generate monster's defense.
  * @return: Defense of monster
  */
-int monster::DEFENSE(){
+int monster::setDEFENSE(){
 	srand(time(0));
 	//int floorLevel = Floor.getLevel();
 	int numDefense = rand()%1+floorLevel;
 	return numDefense;
 }
-
 /*
  * Generate monster's loot.
  * @return: Loot of monster
  */
-int monster::LOOT(){
+int monster::setLOOT(){
 	srand(time(0));
 	int numLoot = rand()%10+1;
 	return numLoot;
+}
+
+/*
+ * Getters to get monster information.
+ */
+string monster::getMONSTER(){
+	return this->name;
+}
+int monster::getHP(){
+	return this->hp;
+}
+int monster::getDAMAGE(){
+	return this->damage;
+}
+int monster::getDEFENSE(){
+	return this->defense;
+}
+int monster::getLOOT(){
+	return this ->loot;
 }
 
 /*
@@ -63,16 +81,13 @@ int monster::LOOT(){
 string boss::getBOSS(){
 	return this->name;
 }
-
-int boss::getHP(){
+int boss::getHPBoss(){
 	return this->hp;
 }
-
-int boss::getDAMAGE(){
+int boss::getDAMAGEBoss(){
 	return this->damage;
 }
-
-int boss::getDEFENSE(){
+int boss::getDEFENSEBoss(){
 	return this->defense;
 }
 
@@ -83,17 +98,30 @@ int boss::getDEFENSE(){
  *      Author: Johnny Li
  */
 int main(){
-	
+
 	//Testing
-monster monster;
-boss boss;
-/*cout<<boss.getBOSS();
-cout<<" boss"<<endl;
-cout<<boss.getHP();
+/*monster monster;
+cout<<monster.getMONSTER();
+cout<<" monster"<<endl;
+cout<<monster.getHP();
 cout<<" hp"<<endl;
-cout<<boss.getDAMAGE();
+cout<<monster.getDAMAGE();
 cout<<" dmg"<<endl;
-cout<<boss.getDEFENSE();
+cout<<monster.getDEFENSE();
+cout<<" def"<<endl;
+cout<<monster.getLOOT();
+cout<<" loot"<<endl;
+
+cout<<endl;
+
+boss boss;
+cout<<boss.getBOSS();
+cout<<" boss"<<endl;
+cout<<boss.getHPBoss();
+cout<<" hp"<<endl;
+cout<<boss.getDAMAGEBoss();
+cout<<" dmg"<<endl;
+cout<<boss.getDEFENSEBoss();
 cout<<" def"<<endl;*/
 
 
