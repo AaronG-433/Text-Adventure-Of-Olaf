@@ -1,8 +1,7 @@
-//File for the monster generation class
 #include "monster.h"
-#include "Floor.h"
+//#include "Floor.h"
 using namespace std;
-
+int floorLevel =1;
 /*
  *Generate a monster name.
  *@return: monster name.
@@ -21,7 +20,7 @@ string monster::monsterGeneration(){
  */
 int monster::HP(){
 	srand(time(0));
-	int floorLevel = Floor.getLevel();
+	//int floorLevel = Floor.getLevel();
 	int numHP = rand()%5+floorLevel;
 	return numHP;
 }
@@ -32,7 +31,7 @@ int monster::HP(){
  */
 int monster::DAMAGE(){
 	srand(time(0));
-	int floorLevel = Floor.getLevel();
+	//int floorLevel = Floor.getLevel();
 	int numDamage = rand()%3+floorLevel;
 	return numDamage;
 }
@@ -43,7 +42,7 @@ int monster::DAMAGE(){
  */
 int monster::DEFENSE(){
 	srand(time(0));
-	int floorLevel = Floor.getLevel();
+	//int floorLevel = Floor.getLevel();
 	int numDefense = rand()%1+floorLevel;
 	return numDefense;
 }
@@ -59,11 +58,22 @@ int monster::LOOT(){
 }
 
 /*
- * Final Boss of the game.
- * 
+ * Getters to get boss information
  */
-void monster::boss(){
-	
+string boss::getBOSS(){
+	return this->name;
+}
+
+int boss::getHP(){
+	return this->hp;
+}
+
+int boss::getDAMAGE(){
+	return this->damage;
+}
+
+int boss::getDEFENSE(){
+	return this->defense;
 }
 
 /*
@@ -73,8 +83,18 @@ void monster::boss(){
  *      Author: Johnny Li
  */
 int main(){
+	
+	//Testing
 monster monster;
-
+boss boss;
+/*cout<<boss.getBOSS();
+cout<<" boss"<<endl;
+cout<<boss.getHP();
+cout<<" hp"<<endl;
+cout<<boss.getDAMAGE();
+cout<<" dmg"<<endl;
+cout<<boss.getDEFENSE();
+cout<<" def"<<endl;*/
 
 
 	return 0;
