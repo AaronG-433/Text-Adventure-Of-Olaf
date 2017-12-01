@@ -28,20 +28,28 @@ private:
 
 public:
 	monster();
-	string monsterGeneration();
-	int HP();
-	int DAMAGE();
-	int DEFENSE();
-	int LOOT();
+	//Setters
+	string setMONSTER();
+	int setHP();
+	int setDAMAGE();
+	int setDEFENSE();
+	int setLOOT();
+
+	//Getters
+	string getMONSTER();
+	int getHP();
+	int getDAMAGE();
+	int getDEFENSE();
+	int getLOOT();
 };
 
 //Monster Constructor
 monster::monster(){
-	name =monsterGeneration();
-	hp =HP();
-	damage =DAMAGE();
-	defense =DEFENSE();
-	loot =LOOT();
+	name =setMONSTER();
+	hp =setHP();
+	damage =setDAMAGE();
+	defense =setDEFENSE();
+	loot =setLOOT();
 }
 
 /*
@@ -56,10 +64,11 @@ private:
 
 public:
 	boss();
+	//Getters
 	string getBOSS();
-	int getHP();
-	int getDAMAGE();
-	int getDEFENSE();
+	int getHPBoss();
+	int getDAMAGEBoss();
+	int getDEFENSEBoss();
 };
 
 //Boss Constructor
