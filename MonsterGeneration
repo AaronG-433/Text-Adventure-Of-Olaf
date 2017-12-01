@@ -1,8 +1,8 @@
 #include "monster.h"
-//#include "Floor.h"
+#include "Floor.h"
 using namespace std;
 
-int floorLevel =1;
+//int floorLevel =1;
 
 /*
  *Setters for the monster generation.
@@ -22,7 +22,7 @@ string monster::setMONSTER(){
  */
 int monster::setHP(){
 	srand(time(0));
-	//int floorLevel = Floor.getLevel();
+	int floorLevel = Floor.getLevel();
 	int numHP = rand()%5+floorLevel;
 	return numHP;
 }
@@ -32,7 +32,7 @@ int monster::setHP(){
  */
 int monster::setDAMAGE(){
 	srand(time(0));
-	//int floorLevel = Floor.getLevel();
+	int floorLevel = Floor.getLevel();
 	int numDamage = rand()%3+floorLevel;
 	return numDamage;
 }
@@ -42,7 +42,7 @@ int monster::setDAMAGE(){
  */
 int monster::setDEFENSE(){
 	srand(time(0));
-	//int floorLevel = Floor.getLevel();
+	int floorLevel = Floor.getLevel();
 	int numDefense = rand()%2+floorLevel;
 	return numDefense;
 }
