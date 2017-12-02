@@ -15,6 +15,7 @@ public:
 
 private:
 	Floor(int level);
+	int getLevel();
 	bool run();
 	void runShop();
 	void runStairs();
@@ -30,6 +31,11 @@ Floor::Floor(int level) {
 	this->level = level;
 	//this->hero = hero;
 
+}
+
+//Will return current floor level
+int Floor::getLevel() {
+	return this->level;
 }
 
 //bool Floor::run() {
