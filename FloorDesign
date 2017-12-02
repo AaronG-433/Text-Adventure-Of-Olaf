@@ -17,7 +17,7 @@ public:
 	Floor(int level);
 	int getLevel();
 	bool run();
-	void runShop();
+	bool runShop();
 	void runStairs();
 	bool runMonster();
 	void runLoot();
@@ -125,8 +125,9 @@ bool Floor::run() {
 
 }
 
-void Floor::runShop() {
+bool Floor::runShop() {
 	//call store class
+	return true;
 }
 
 void Floor::runStairs() {
