@@ -9,11 +9,11 @@
 using namespace::std;
 
 class Floor {
-public:
+private:
 	int level;
 	//Character hero;
 
-private:
+public:
 	Floor(int level);
 	int getLevel();
 	bool run();
