@@ -10,6 +10,10 @@
 #include "monsterGeneration.h"
 #include "characterCreation.h"
 #include "userInterface.h"
+#include <thread>
+#include <Windows.h>
+#include <chrono>
+#include <iostream>
 
 int intCheck(string userChoice)
 {
@@ -232,7 +236,11 @@ Floor::Floor(int level, Player* hero) {
 //}
 
 bool Floor::run() {
-	bool fail = false;
+
+	if(hero->getHealth() <= 0) {
+		return false;
+	}
+	bool fail = true;
 	int outcome = 0;
 	time_t timer;
 	//int loot = 0;
@@ -242,29 +250,39 @@ bool Floor::run() {
 	if(level < 5) {
 		//Run through each room
 		for(int i=0; i<level*2; i++) {
+			if(hero->getHealth() <= 0) {
+				return false;
+			}
+
+			if(!fail) {
+				break;
+			}
 			//Randomly generate room type
 			time(&timer);
 			srand(timer);
 			outcome = rand()%10;
 
-			if(outcome >= 0 && outcome < 5) {
+			if(outcome >= 0 && outcome < 5 && fail) {
 				//Call monster method and check if they survived
-				if(!this->runMonster()) {
-					fail = true;
+				fail = this->runMonster();
+				if(!fail) {
+					//fail = true;
 					return false;
-					break;
+					//break;
+				} else {
+
 				}
 
 				//Run loot method
-			} else if(outcome >= 5 && outcome < 9) {
+			} else if(outcome >= 5 && outcome < 9 && fail) {
 				this->runLoot();
 				//Run nothing method
-			} else if(outcome == 9) {
+			} else if(outcome == 9 && fail) {
 				this->runNothing();
 			}
 		}
 		//If they clear the floor, continue
-		if(!fail) {
+		if(fail) {
 			this->runStairs();
 		}
 		//If it is the boss level, run the boss method
@@ -277,7 +295,11 @@ bool Floor::run() {
 
 	}
 		//Return true if they cleared the floor, false if they failed
-
+	if(!fail) {
+		return false;
+	} else {
+		return true;
+	}
 	return true;
 
 }
@@ -298,7 +320,7 @@ void Floor::runStairs() {
 
 	hero->lvlUp(this->level);
 	hero->setHealth(hero->getMaxHP());
-	hero->setMaxMana(hero->getMaxMana());
+	hero->setCurMana(hero->getMaxMana());
 
 	char choice;
 	do {
@@ -325,6 +347,8 @@ bool Floor::runMonster() {
 		cout << "You have defeated the monster! Most impressive." << endl;
 		cout << "You find " << monst->getLOOT() << " loot on the monster's corpse.  Well earned." << endl;
 		cout << "You move on with " << hero->getHealth() << " health and " << hero->getCurMana() << " mana." << endl;
+
+		std::chrono::duration<int, std::milli> timespan(1000);
 		char choice;
 		do {
 			cout << "Press c to continue." << endl;
@@ -334,6 +358,7 @@ bool Floor::runMonster() {
 	} else {
 		//If fail
 		cout << "You have been killed.  The monster feeds on your lifeless corpse..." << endl;
+		std::chrono::duration<int, std::milli> timespan(1000);
 		char choice;
 		do {
 			cout << "Press c to continue...to the afterlife" << endl;
@@ -345,7 +370,7 @@ bool Floor::runMonster() {
 
 
 	//Return true if successful, false if death
-	return true;
+	//return true;
 }
 
 //Unused?
@@ -359,6 +384,8 @@ void Floor::runLoot() {
 					 << "You take it and run." << endl;
 	//Store loot
 
+	std::chrono::duration<int, std::milli> timespan(1000);
+	//sleep_for(std::chrono::seconds(1));
 	char choice;
 	do {
 		cout << "Press c to continue." << endl;
@@ -371,7 +398,7 @@ void Floor::runNothing() {
 	cout << "You bust down the door ready to fight!" << endl;
 	cout << "....\n...\nBut nothing happens?" << endl;
 	cout << "You continue on, confused and slightly disappointed." << endl;
-
+	std::chrono::duration<int, std::milli> timespan(1000);
 	char choice;
 	do {
 		cout << "Press c to continue." << endl;
@@ -526,6 +553,10 @@ int Knight::getDef()
 {
   return this->def;
 }
+void Knight::setDef(int def)
+{
+	this->def = def;
+}
 int Knight::getCurMana()
 {
   return this->curMana;
@@ -560,6 +591,7 @@ void Knight::lvlUp(int floorLevel)
   this->setMaxHP(this->getMaxHP()+5);
   this->setDmg(this->getDmg() + floorLevel);
   this->setMaxMana(this->getMaxMana() + 5);
+  this->setDef(this->getDef() + 1);
 }
 int Knight::getHealth()
 {
@@ -648,6 +680,10 @@ int Archer::getDef()
 {
   return this->def;
 }
+void Archer::setDef(int def)
+{
+	this->def = def;
+}
 int Archer::getCurMana()
 {
   return this->curMana;
@@ -682,6 +718,7 @@ void Archer::lvlUp(int floorLevel)
   this->setMaxHP(this->getMaxHP()+5);
   this->setDmg(this->getDmg() + floorLevel);
   this->setMaxMana(this->getMaxMana() + 5);
+  this->setDef(this->getDef() + 1);
 }
 int Archer::getHealth()
 {
@@ -771,6 +808,9 @@ int Caster::getDef()
 {
   return this->def;
 }
+void Caster::setDef(int def) {
+	this->def = def;
+}
 int Caster::getCurMana()
 {
   return this->curMana;
@@ -805,6 +845,7 @@ void Caster::lvlUp(int floorLevel)
   this->setMaxHP(this->getMaxHP()+5);
   this->setDmg(this->getDmg() + floorLevel);
   this->setMaxMana(this->getMaxMana() + 5);
+  this->setDef(this->getDef() + 1);
 }
 int Caster::getHealth()
 {
