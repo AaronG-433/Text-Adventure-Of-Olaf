@@ -6,25 +6,10 @@
 
 #include <cstdlib>
 #include <iostream>
+#include "floorDesign.h"
 using namespace::std;
 
-class Floor {
-private:
-	int level;
-	//Character hero;
 
-public:
-	Floor(int level);
-	int getLevel();
-	bool run();
-	bool runShop();
-	void runStairs();
-	bool runMonster();
-	void runLoot();
-	void runNothing();
-	bool runBoss();
-
-};
 
 //Will also take the character as a parameter
 Floor::Floor(int level) {
