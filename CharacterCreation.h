@@ -1,4 +1,4 @@
-/*
+ /*
  * CharacterCreation.h
  *
  *  Created on: Nov 30, 2017
@@ -21,22 +21,24 @@ class Player
 		virtual void setHealth(int hp) = 0;
 		virtual int getMaxHP() = 0;
 		virtual void setMaxHP(int hp) = 0;
-		virtual void lvlUp() = 0;
+		virtual void lvlUp(int floorLevel) = 0;
 		virtual string getClass() = 0;
 		virtual string getName() = 0;
 		virtual int getLvl() = 0;
     		virtual int getDmg() = 0;
+    		virtual void setDmg(int dmg) = 0;
     		virtual int getDef() = 0;
    		virtual int getCurMana() = 0;
    		virtual void setCurMana(int mana) = 0;
     		virtual int getMaxMana() = 0;
+    		virtual void setMaxMana(int maxMana) = 0;
     		virtual void setLvl(int lvl) = 0;
 
 		virtual ~Player() {};				//////////////Added {} instead of =0 and we good
   protected:
-	
+
 			//////////////////////TODO: do the constructors need inputs since we set values ahead of time?
-	
+
     Player (int maxHP, int lvl, int maxMana, string name)
     {
     this -> maxHP = maxHP;
@@ -49,8 +51,8 @@ class Player
 
 	//These are the general player states
 
-		int curHP = 20;
-		int maxHP = 20;
+		int curHP = 10;
+		int maxHP = 10;
 		int lvl = 1;
 		int curMana = 10;
 		int mana = 10;
@@ -85,16 +87,18 @@ class Knight : public Player
   		void setHealth(int hp);
   		int getMaxHP();
 		void setMaxHP(int hp);
-  		void lvlUp();
+  		void lvlUp(int floorLevel);
   		string getName();
   		int getLvl();
       		void setLvl(int lvl);
       		string getClass();
       		int getDmg();
+      		void setDmg(int dmg);
       		int getDef();
       		int getCurMana();
       		int getMaxMana();
       		void setCurMana(int mana);
+      		void setMaxMana(int maxMana);
 	//~Knight();
       //Constructor for subclass knight
 		Knight(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
@@ -131,16 +135,18 @@ class Archer : public Player
   		void setHealth(int hp);
   		int getMaxHP();
 		void setMaxHP(int hp);
-  	 	void lvlUp();
+  	 	void lvlUp(int floorLevel);
   		string getName();
   		int getLvl();
       		void setLvl(int lvl);
       		string getClass();
       		int getDmg();
+      		void setDmg(int dmg);
       		int getDef();
 		int getCurMana();
       		int getMaxMana();
       		void setCurMana(int mana);
+      		void setMaxMana(int maxMana);
 	//~Archer();
       //Constructor for subclass knight
 		Archer(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
@@ -177,16 +183,18 @@ class Caster : public Player
   		void setHealth(int hp);
   		int getMaxHP();
 		void setMaxHP(int hp);
-  	  	void lvlUp();
+  	  	void lvlUp(int floorLevel);
   		string getName();
   		int getLvl();
       		void setLvl(int lvl);
       		string getClass();
       		int getDmg();
+      		void setDmg(int dmg);
       		int getDef();
 		int getCurMana();
       		int getMaxMana();
       		void setCurMana(int mana);
+      		void setMaxMana(int maxMana);
 	//~Caster();
       //Constructor for subclass knight
 		Caster(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
@@ -210,7 +218,6 @@ void chooseClass(Player* player, String* class)
 	{
 		cout << "What class will you choose? Will you be a Knight[1], a Caster[2], or an Archer	[3]?" << endl;
 		cin >> 	classDecision;
-
 		switch(classDecision)
 		{
 		case 1:
@@ -224,25 +231,9 @@ void chooseClass(Player* player, String* class)
 			break;
 		default:
 			cout << "Please choose one of the classes available!" << endl;
-
-
 		}
 	}
-
-
 }
 */
-int main()
-{
 
-  cout << "Program ran" << endl;
-	Archer *archer = new Archer(10, 5, 10, "olaf");
-	cout << archer->getDmg() << endl;
-	cout << archer->luckyShot() << endl;
-	cout << archer->getCurMana() << endl;
-	archer->lvlUp();
-	cout << archer->getLvl() << endl;
-
-
-}
 #endif
