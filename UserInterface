@@ -1,1 +1,39 @@
-//File for User Interface class, will also contain the main method
+#include <iostream>
+#include "UserInterface.h"
+
+using namespace std;
+
+//Creates the story and accesses different parts
+void UserInterface:: createStory () {
+    int part = storyPart;
+    string parta;
+    //Use after character creation in story.
+    if (part == 0) {
+        cout << "You lay awake on a stone cold floor in a dank, lifeless dungeon. Your mind stirs for you name...\n\nEnter c to continue.\n\n";
+        
+        while (parta != "c") {
+            cin >> parta;
+            if (parta == "c") {
+                cout << /*player.getName() gets the player entered name*/"Olaf" << ", yes, that's it..\n\nEven with your name remembered, there still lies a thick fog over your memory as you take your first steps into the dimly lit darkness ahead.";
+            }
+            else {
+                cout << "Press c to clear your mind.\n\n";
+            }
+        }
+        parta = " ";
+    }
+    //Use on first monster encounter.
+    if (part == 1) {
+        cout << "\n\nSomething lurks in the shadows.. A MONSTER STRIKES!? What hellish nightmare is this? As your panic heightens, as does a surge of energy through your veins. You remember your years training. Kill or be killed.\n\n";
+    }
+    //Use after first level.
+    if (part == 2) {
+        cout << "";
+    }
+}
+int UserInterface:: getStoryPart () {
+    return storyPart;
+}
+void UserInterface:: setStoryPart (int part) {
+    storyPart = part;
+}
