@@ -5,12 +5,16 @@
 #include <iostream>
 #include <string>
 #include "CharacterCreation.h"				/////////////////////////Don't forget to include the header!
-	
-	
+
+
 //Defining the methods inherited from the abstract Player class
 int Knight::getDmg()
 {
   return this->dmg;
+}
+void Knight::setDmg(int dmg)
+{
+	this->dmg = dmg;
 }
 int Knight::getDef()
 {
@@ -28,6 +32,10 @@ int Knight::getMaxMana()
 {
   return this->maxMana;
 }
+void Knight::setMaxMana(int maxMana)
+{
+	this->maxMana = maxMana;
+}
 int Knight::getLvl()
 {
   return this->lvl;
@@ -40,9 +48,12 @@ void Knight::setLvl(int lvl)
 {
   (this->lvl) = lvl;
 }
-void Knight::lvlUp()
+void Knight::lvlUp(int floorLevel)
 {
   this->setLvl(this->getLvl()+1);
+  this->setMaxHP(this->getMaxHP()+5);
+  this->setDmg(this->getDmg() + floorLevel);
+  this->setMaxMana(this->getMaxMana() + 5);
 }
 int Knight::getHealth()
 {
@@ -123,6 +134,10 @@ int Archer::getDmg()
 {
   return this->dmg;
 }
+void Archer::setDmg(int dmg)
+{
+	this->dmg = dmg;
+}
 int Archer::getDef()
 {
   return this->def;
@@ -139,6 +154,10 @@ int Archer::getMaxMana()
 {
   return this->maxMana;
 }
+void Archer::setMaxMana(int maxMana)
+{
+	this->maxMana = maxMana;
+}
 int Archer::getLvl()
 {
   return this->lvl;
@@ -151,10 +170,12 @@ void Archer::setLvl(int lvl)
 {
   (this->lvl) = lvl;
 }
-void Archer::lvlUp()
+void Archer::lvlUp(int floorLevel)
 {
-
   this->setLvl(this->getLvl()+1);
+  this->setMaxHP(this->getMaxHP()+5);
+  this->setDmg(this->getDmg() + floorLevel);
+  this->setMaxMana(this->getMaxMana() + 5);
 }
 int Archer::getHealth()
 {
@@ -236,6 +257,10 @@ int Caster::getDmg()
 {
   return this->dmg;
 }
+void Caster::setDmg(int dmg)
+{
+	this->dmg = dmg;
+}
 int Caster::getDef()
 {
   return this->def;
@@ -252,6 +277,10 @@ int Caster::getMaxMana()
 {
   return this->maxMana;
 }
+void Caster::setMaxMana(int maxMana)
+{
+	this->maxMana = maxMana;
+}
 int Caster::getLvl()
 {
   return this->lvl;
@@ -264,9 +293,12 @@ void Caster::setLvl(int lvl)
 {
   (this->lvl) = lvl;
 }
-void Caster::lvlUp()
+void Caster::lvlUp(int floorLevel)
 {
   this->setLvl(this->getLvl()+1);
+  this->setMaxHP(this->getMaxHP()+5);
+  this->setDmg(this->getDmg() + floorLevel);
+  this->setMaxMana(this->getMaxMana() + 5);
 }
 int Caster::getHealth()
 {
