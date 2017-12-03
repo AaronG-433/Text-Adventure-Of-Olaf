@@ -177,3 +177,34 @@ void UserInterface::lag(int n) {
         j--;
     }
 }
+
+********EXTRA EXTRA**********************
+//title and credits
+void UserInterface::beginEnd(int x) {
+    if (x == 0) {
+        cout << "========================================";
+        cout << "\n\t\t";
+        opener("THE ADVENTURES OF OLAF!\n");
+        cout << "========================================\n\n";
+    }
+    if (x == 1) {
+        cout << "\n\n";
+        for(int i = 0; i < achievementRecorder.size(); i++) {
+            cout << achievementRecorder.at(i) << endl;
+        }
+        
+        opener("\n\nCREDITS\n\n");
+        cout << "User Interface:";
+        opener(" Matthew Leonard\n\n");
+        cout << "Character Creation:";
+        opener(" Dylan Alvarez\n\n");
+        cout << "Floor Design:";
+        opener(" Alexander Jasper\n\n");
+        cout << "Monster Creation:";
+        opener(" Johnny Li\n\n");
+        cout << "Combat System:";
+        opener(" Aaron Gaskin");
+        
+        
+    }
+}
