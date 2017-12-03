@@ -4,8 +4,7 @@
 */
 #include <iostream>
 #include <string>
-#include "CharacterCreation.h"				/////////////////////////Don't forget to include the header!
-
+#include "CharacterCreation.h"
 
 //Defining the methods inherited from the abstract Player class
 int Knight::getDmg()
@@ -211,9 +210,9 @@ int Archer::skill1()
   }
   else
   {
-	  cout << "Snipe!" << endl;
+	 cout << "Snipe!" << endl;
      curMana = curMana - 2;
-	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
+	 return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
@@ -265,7 +264,7 @@ int Caster::getDmg()
 {
   return this->dmg;
 }
-void Caster::setDmg(int dmg)
+void Caster::setDmg(int  dmg)
 {
 	this->dmg = dmg;
 }
@@ -371,7 +370,7 @@ int Caster::skill3()
   }
 }
 
-int Caster::primordialBurst()
+int Caster::skill4()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
   {
