@@ -7,6 +7,7 @@
 
 #include "CombatSystem.h"
 #include "CharacterCreation.cpp"
+#include "MonsterGeneration.cpp"
 
 /******************
  * Name: intCheck
@@ -45,7 +46,7 @@ int intCheck(string userChoice)
 	return x;
 }
 
-bool combatSystem(Player* player, monster* monster)
+bool combatSystem(Player* player, monster* mon)
 {
 	//set up values for player
 	string choice = "";
@@ -56,10 +57,10 @@ bool combatSystem(Player* player, monster* monster)
 	int charDefense = player->getDef();
 
 	//set up values for monster
-	int monHealth = monster->getHP();
-	int monDamage = monster->getDAMAGE();
-	int monDefense = monster->getDEFENSE();
-	string monName = monster->getMONSTER();
+	int monHealth = mon->getHP();
+	int monDamage = mon->getDAMAGE();
+	int monDefense = mon->getDEFENSE();
+	string monName = mon->getMONSTER();
 
 	//setting damage values
 	int charAttack = charDamage - monDefense;
@@ -76,11 +77,10 @@ bool combatSystem(Player* player, monster* monster)
 	{
 		//outputs info to user
 		cout << "You have " << charHealth << " HP and " << charDamage << " attack." <<endl;
-		cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
 
 		//ask for user's choice
 		cout << "What would you like to do?\n";
-		cout << "1.) Basic Attack\t2.) Use Skill\t3.) Use Item" << endl;
+		cout << "1.) Basic Attack\n2.) Use Skill\n3.) Use Item" << endl;
 		cin >> choice;
 		//verify that it is an integer
 		intChoice = intCheck(choice);
@@ -90,25 +90,31 @@ bool combatSystem(Player* player, monster* monster)
 		{
 			case 1: cout << "You strike the " << monName << " It takes " << charAttack << " damage." << endl;
 					monHealth = monHealth - charAttack;
+					//check if monster is dead
+					if(monHealth <= 0)
+					{
+						return true;
+					}
+					//if not dead then monster hits player
 					cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
 					player->setHealth(charHealth - monAttack);
+					charHealth = player->getHealth();
 					break;
-			case 2:
+			case 2:			//TODO: implement skills
 					break;
-			case 3:
+			case 3:			//TODO: instead of item do block/dodge?
 					break;
 			default: cout << "Invalid choice!" << endl;
 		}
 
-		//check if either player or monster is dead
-		if(monHealth <= 0)		//check monster health first because player hits first
-		{
-			return true;
-		}
-		else if(charHealth <= 0)		//then check player health
+		//Check if the player is dead
+		if(charHealth <= 0)
 		{
 			return false;
 		}
+
+		//output how much health the monster has
+		cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
 	}
 }
 
