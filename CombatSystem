@@ -1,17 +1,12 @@
-//File for the Combat System class
-
 //============================================================================
 // Name        : CombatSystem.cpp
 // Author      : Aaron Gaskin
 // Description : Combat System method, will take in a character and monster object.
-//				       Then it will take in player choice as the character fights the monster.
+//				 Then it will take in player choice as the character fights the monster.
 //============================================================================
 
-#include <iostream>
-#include <string>
-#include <sstream>		//imports the stringstream function
-#include <cctype>		//imports the isspace() function
-using namespace std;
+#include "CombatSystem.h"
+#include "CharacterCreation.cpp"
 
 /******************
  * Name: intCheck
@@ -50,11 +45,21 @@ int intCheck(string userChoice)
 	return x;
 }
 
-bool combatSystem(int charHealth, int charMana, int charDamage, int charDefense, int monHealth, int monDamage, int monDefense, string monName)
+bool combatSystem(Player* player, monster* monster)
 {
-	//initialize variables
+	//set up values for player
 	string choice = "";
 	int intChoice = 0;
+	int charHealth = player->getHealth();
+	int charMana = player->getCurMana();
+	int charDamage = player->getDmg();
+	int charDefense = player->getDef();
+
+	//set up values for monster
+	int monHealth = monster->getHP();
+	int monDamage = monster->getDAMAGE();
+	int monDefense = monster->getDEFENSE();
+	string monName = monster->getMONSTER();
 
 	//setting damage values
 	int charAttack = charDamage - monDefense;
@@ -86,7 +91,7 @@ bool combatSystem(int charHealth, int charMana, int charDamage, int charDefense,
 			case 1: cout << "You strike the " << monName << " It takes " << charAttack << " damage." << endl;
 					monHealth = monHealth - charAttack;
 					cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
-					charHealth = charHealth - monAttack;
+					player->setHealth(charHealth - monAttack);
 					break;
 			case 2:
 					break;
@@ -110,19 +115,13 @@ bool combatSystem(int charHealth, int charMana, int charDamage, int charDefense,
 
 int main() {
 	//character stats
-	int charHealth = 20;
-	int charMana = 10;
-	int charDamage = 4;
-	int charDefense = 3;
+	Archer* character = new Archer(10, 5, 10, "olaf");
 
 	//monster stats
-	int monHealth = 10;
-	int monDamage = 1;
-	int monDefense = 1;
-	string monName = "Goblin";
+	monster* mon = new monster(2);
 
 	//if true then player killed monster, if false then player died
-	if(combatSystem(charHealth, charMana, charDamage, charDefense, monHealth, monDamage, monDefense, monName))
+	if(combatSystem( character, mon))
 	{
 		cout << "HAZZAH! You have slain the beast!" << endl;
 	}
