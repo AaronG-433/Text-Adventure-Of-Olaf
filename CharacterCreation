@@ -4,9 +4,9 @@
 */
 #include <iostream>
 #include <string>
-
-		//////////////////////TODO: does not compile for me, throws up a lot of errors and no idea why
-		
+#include "CharacterCreation.h"				/////////////////////////Don't forget to include the header!
+	
+	
 //Defining the methods inherited from the abstract Player class
 int Knight::getDmg()
 {
