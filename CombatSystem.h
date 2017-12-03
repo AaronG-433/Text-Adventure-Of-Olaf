@@ -1,4 +1,3 @@
-
 /*
  * CombatSystem.h
  *
