@@ -4,6 +4,9 @@
 */
 #include <iostream>
 #include <string>
+
+		//////////////////////TODO: does not compile for me, throws up a lot of errors and no idea why
+		
 //Defining the methods inherited from the abstract Player class
 int Knight::getDmg()
 {
