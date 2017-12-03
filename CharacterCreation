@@ -77,7 +77,7 @@ string Knight::getClass()
 }
 
 //Skill: returns an int for now, can become its own algorithm though
-int Knight::styleishSpin()
+int Knight::skill1()
 {
   if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
   {
@@ -85,12 +85,13 @@ int Knight::styleishSpin()
   }
   else
   {
+	  cout << "Styleish Spin!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Knight::shieldBash()
+int Knight::skill2()
 {
   if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
   {
@@ -98,11 +99,12 @@ int Knight::shieldBash()
   }
   else
   {
+	  cout << "Shield Bash!" << endl;
      curMana = curMana - 4;
 	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
-int Knight::demacianJudgement()
+int Knight::skill3()
 {
   if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
   {
@@ -110,12 +112,13 @@ int Knight::demacianJudgement()
   }
   else
   {
+	  cout << "Demacian Judgment!" << endl;
      curMana = curMana - 6;
      return 4 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Knight::foolishCourage()
+int Knight::skill4()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
   {
@@ -123,6 +126,7 @@ int Knight::foolishCourage()
   }
   else
   {
+	  cout << "'SQUARE UP!!!' You yell as you charge headlong at the monster." << endl;
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -199,7 +203,7 @@ string Archer::getClass()
 }
 
 //Skill: returns an int for now, can become its own algorithm though
-int Archer::snipe()
+int Archer::skill1()
 {
   if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
   {
@@ -207,12 +211,13 @@ int Archer::snipe()
   }
   else
   {
+	  cout << "Snipe!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Archer::luckyShot()
+int Archer::skill2()
 {
   if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
   {
@@ -220,11 +225,12 @@ int Archer::luckyShot()
   }
   else
   {
+	  cout << "Lucky Shot!" << endl;
      curMana = curMana - 4;
 	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
-int Archer::hailMary()
+int Archer::skill3()
 {
   if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
   {
@@ -232,13 +238,14 @@ int Archer::hailMary()
   }
   else
   {
+	  cout << "Hail Mary!" << endl;
      curMana = curMana - 6;
      return 4 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
 
-int Archer::oneInAMillion()
+int Archer::skill4()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
   {
@@ -246,6 +253,7 @@ int Archer::oneInAMillion()
   }
   else
   {
+	  cout << "'Well, here goes nothing!' You shout as you fire wildly at the beast." << endl;
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -322,7 +330,7 @@ string Caster::getClass()
 }
 
 //Skill: returns an int for now, can become its own algorithm though
-int Caster::balefulStrike()
+int Caster::skill1()
 {
   if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
   {
@@ -330,12 +338,13 @@ int Caster::balefulStrike()
   }
   else
   {
+	  cout << "Baleful Strike!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Caster::darkMatter()
+int Caster::skill2()
 {
   if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
   {
@@ -343,11 +352,12 @@ int Caster::darkMatter()
   }
   else
   {
+	  cout << "Dark Matter!" << endl;
      curMana = curMana - 4;
 	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
-int Caster::eventHorizon()
+int Caster::skill3()
 {
   if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
   {
@@ -355,6 +365,7 @@ int Caster::eventHorizon()
   }
   else
   {
+	  cout << "Event Horizon!" << endl;
      curMana = curMana - 6;
      return 4 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -368,6 +379,7 @@ int Caster::primordialBurst()
   }
   else
   {
+	  cout << "'Face my ultimate spell!!!' You declare as you lob a massive ball of energy at the beast." << endl;
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
