@@ -25,14 +25,20 @@ class Player
 		virtual string getClass() = 0;
 		virtual string getName() = 0;
 		virtual int getLvl() = 0;
-    		virtual int getDmg() = 0;
-    		virtual void setDmg(int dmg) = 0;
-    		virtual int getDef() = 0;
+		virtual int getDmg() = 0;
+		virtual void setDmg(int dmg) = 0;
+		virtual int getDef() = 0;
    		virtual int getCurMana() = 0;
    		virtual void setCurMana(int mana) = 0;
-    		virtual int getMaxMana() = 0;
-    		virtual void setMaxMana(int maxMana) = 0;
-    		virtual void setLvl(int lvl) = 0;
+		virtual int getMaxMana() = 0;
+		virtual void setMaxMana(int maxMana) = 0;
+		virtual void setLvl(int lvl) = 0;
+
+		//skills
+		virtual int skill1() = 0;
+		virtual int skill2() = 0;
+		virtual int skill3() = 0;
+		virtual int skill4() = 0;
 
 		virtual ~Player() {};				//////////////Added {} instead of =0 and we good
   protected:
@@ -78,27 +84,27 @@ class Knight : public Player
 
 	public:
 	//skills
-		int styleishSpin();
-		int shieldBash();
-		int demacianJudgement();
-		int foolishCourage();
+    	int skill1();
+    	int skill2();
+    	int skill3();
+    	int skill4();
       //inheritance
-     		int getHealth();
+     	int getHealth();
   		void setHealth(int hp);
   		int getMaxHP();
 		void setMaxHP(int hp);
   		void lvlUp(int floorLevel);
   		string getName();
   		int getLvl();
-      		void setLvl(int lvl);
-      		string getClass();
-      		int getDmg();
-      		void setDmg(int dmg);
-      		int getDef();
-      		int getCurMana();
-      		int getMaxMana();
-      		void setCurMana(int mana);
-      		void setMaxMana(int maxMana);
+		void setLvl(int lvl);
+		string getClass();
+		int getDmg();
+		void setDmg(int dmg);
+		int getDef();
+		int getCurMana();
+		int getMaxMana();
+		void setCurMana(int mana);
+		void setMaxMana(int maxMana);
 	//~Knight();
       //Constructor for subclass knight
 		Knight(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
@@ -126,27 +132,28 @@ class Archer : public Player
 
 	public:
 			//skills
-      		int snipe();
-  		int luckyShot();
-  		int hailMary();
-  		int oneInAMillion();
+   		int skill1();
+		int skill2();
+		int skill3();
+		int skill4();
+
       //inheritance
-      		int getHealth();
+		int getHealth();
   		void setHealth(int hp);
   		int getMaxHP();
 		void setMaxHP(int hp);
   	 	void lvlUp(int floorLevel);
   		string getName();
   		int getLvl();
-      		void setLvl(int lvl);
-      		string getClass();
-      		int getDmg();
-      		void setDmg(int dmg);
-      		int getDef();
+		void setLvl(int lvl);
+		string getClass();
+		int getDmg();
+		void setDmg(int dmg);
+		int getDef();
 		int getCurMana();
-      		int getMaxMana();
-      		void setCurMana(int mana);
-      		void setMaxMana(int maxMana);
+		int getMaxMana();
+		void setCurMana(int mana);
+		void setMaxMana(int maxMana);
 	//~Archer();
       //Constructor for subclass knight
 		Archer(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
@@ -174,27 +181,28 @@ class Caster : public Player
 
 	public:
 		//skills
-      		int balefulStrike();
-  		int darkMatter();
-  		int eventHorizon();
-  		int primordialBurst();
+		int skill1();
+		int skill2();
+		int skill3();
+		int skill4();
+
       //inheritance
-      		int getHealth();
+		int getHealth();
   		void setHealth(int hp);
   		int getMaxHP();
 		void setMaxHP(int hp);
   	  	void lvlUp(int floorLevel);
   		string getName();
   		int getLvl();
-      		void setLvl(int lvl);
-      		string getClass();
-      		int getDmg();
-      		void setDmg(int dmg);
-      		int getDef();
+		void setLvl(int lvl);
+		string getClass();
+		int getDmg();
+		void setDmg(int dmg);
+		int getDef();
 		int getCurMana();
-      		int getMaxMana();
-      		void setCurMana(int mana);
-      		void setMaxMana(int maxMana);
+		int getMaxMana();
+		void setCurMana(int mana);
+		void setMaxMana(int maxMana);
 	//~Caster();
       //Constructor for subclass knight
 		Caster(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
