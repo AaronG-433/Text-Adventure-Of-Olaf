@@ -10,7 +10,7 @@ using namespace std;
  *@return: monster name.
  */
 string monster::setMONSTER(){
-	string monsterSelection[]={"Slime","Globin","Wyvern","Mummy","Orc","Imp","Dark Phantom","Vampire","Minotaur","Skeletal"};
+	string monsterSelection[]={"Slime","Goblin","Wyvern","Mummy","Orc","Imp","Dark Phantom","Vampire","Minotaur","Skeletal"};
 	srand(time(0));
 	int numMonster = rand()%10;
 	string monsterName = monsterSelection[numMonster];
@@ -20,9 +20,9 @@ string monster::setMONSTER(){
  * Generate monster's hp.
  * @return: HP of monster
  */
-int monster::setHP(){
+int monster::setHP(int level){
 	srand(time(0));
-	int floorLevel = Floor.getLevel();
+	int floorLevel = level;
 	int numHP = rand()%5+floorLevel;
 	return numHP;
 }
@@ -30,9 +30,9 @@ int monster::setHP(){
  * Generate monster's damage.
  * @return: Damage of monster
  */
-int monster::setDAMAGE(){
+int monster::setDAMAGE(int level){
 	srand(time(0));
-	int floorLevel = Floor.getLevel();
+	int floorLevel = level;
 	int numDamage = rand()%3+floorLevel;
 	return numDamage;
 }
@@ -40,9 +40,9 @@ int monster::setDAMAGE(){
  * Generate monster's defense.
  * @return: Defense of monster
  */
-int monster::setDEFENSE(){
+int monster::setDEFENSE(int level){
 	srand(time(0));
-	int floorLevel = Floor.getLevel();
+	int floorLevel = level;
 	int numDefense = rand()%2+floorLevel;
 	return numDefense;
 }
@@ -90,43 +90,3 @@ int boss::getDAMAGEBoss(){
 int boss::getDEFENSEBoss(){
 	return this->defense;
 }
-
-/*
- * main.cpp
- *
- *  Created on: Nov 30, 2017
- *      Author: Johnny Li
- */
-int main(){
-
-	//Testing
-/*monster monster;
-cout<<monster.getMONSTER();
-cout<<" monster"<<endl;
-cout<<monster.getHP();
-cout<<" hp"<<endl;
-cout<<monster.getDAMAGE();
-cout<<" dmg"<<endl;
-cout<<monster.getDEFENSE();
-cout<<" def"<<endl;
-cout<<monster.getLOOT();
-cout<<" loot"<<endl;
-
-cout<<endl;
-
-boss boss;
-cout<<boss.getBOSS();
-cout<<" boss"<<endl;
-cout<<boss.getHPBoss();
-cout<<" hp"<<endl;
-cout<<boss.getDAMAGEBoss();
-cout<<" dmg"<<endl;
-cout<<boss.getDEFENSEBoss();
-cout<<" def"<<endl;*/
-
-
-	return 0;
-}
-
-
-
