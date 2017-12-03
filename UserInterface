@@ -1,11 +1,15 @@
+
+
 #include <iostream>
 #include "UserInterface.h"
 
 using namespace std;
 
 //Creates the story and accesses different parts
+
+
 void UserInterface:: createStory () {
-    int part = storyPart;
+    int part = this->storyPart;
     string parta;
     //Use after character creation in story.
     if (part == 0) {
@@ -31,9 +35,18 @@ void UserInterface:: createStory () {
         cout << "";
     }
 }
+
 int UserInterface:: getStoryPart () {
-    return storyPart;
+    return this->storyPart;
 }
+
 void UserInterface:: setStoryPart (int part) {
-    storyPart = part;
+    this->storyPart = part;
+}
+
+
+int main() {
+    UserInterface UI;
+    UI.setStoryPart(0);
+    UI.createStory();
 }
