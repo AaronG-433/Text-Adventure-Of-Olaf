@@ -26,7 +26,7 @@ public:
 
 };
 
-//Will also take the character (And store?) as a parameter
+//Will also take the character as a parameter
 Floor::Floor(int level) {
 	this->level = level;
 	//this->hero = hero;
@@ -81,40 +81,35 @@ bool Floor::run() {
 	int outcome = 0;
 	//int loot = 0;
 	//Run shop and check if the method runs
-	if(this->runShop()) {					/////////////Remove shope check
-		//If not the boss level
-		if(level < 5) {
-			//Run through each room
-			for(int i=0; i<level*2; i++) {
-				//Randomly generate room type
-				outcome = rand()%10;
-				
-				if(outcome >= 0 && outcome < 5) {
-				
-					///////////////////////////TODO: create switch method to choose to fight or wait(waiting does nothing) w/in while loop
-				
-					//Call monster method and check if they survived
-					if(!this->runMonster()) {
-						fail = true;
-						return false;
-					}
 
-					//Run loot method
-				} else if(outcome >= 5 && outcome < 9) {
-					this->runLoot();
-					//Run nothing method
-				} else if(outcome == 9) {
-				
-					///////////////TODO: create switch for nothing choices w/in while loop
-				
-					this->runNothing();
+	//If not the boss level
+	if(level < 5) {
+		//Run through each room
+		for(int i=0; i<level*2; i++) {
+			//Randomly generate room type
+			srand(time(0));
+			outcome = rand()%10;
+
+			if(outcome >= 0 && outcome < 5) {
+				//Call monster method and check if they survived
+				if(!this->runMonster()) {
+					fail = true;
+					return false;
 				}
+
+				//Run loot method
+			} else if(outcome >= 5 && outcome < 9) {
+				this->runLoot();
+				//Run nothing method
+			} else if(outcome == 9) {
+				this->runNothing();
 			}
-			//If they clear the floor, continue
-			if(!fail) {
-				this->runStairs();
-			}
-			//If it is the boss level, run the boss method
+		}
+		//If they clear the floor, continue
+		if(!fail) {
+			this->runStairs();
+		}
+		//If it is the boss level, run the boss method
 		} else if(level == 5) {
 			if(!this->runBoss()) {
 				return false;
@@ -122,28 +117,32 @@ bool Floor::run() {
 
 		}
 		//Return true if they cleared the floor, false if they failed
-	} else {
-		return false;
-	}
 
 	return true;
 
 }
 
+//Unused
 bool Floor::runShop() {
 	//call store class
 	return true;
 }
 
+//Run end floor text and level up/heal hero
 void Floor::runStairs() {
 	cout << "Congratulations! You have completed floor " << level
 			<< "! Beware, even greater dangers lie ahead." << endl;
 	if(this->level == 4) {
 		cout << "You'd best prepare yourself, for your greatest challenge lies below" << endl;
 	}
+
+	//hero->lvlUp();
+	//hero->setHealth(hero->getMaxHP());
 }
 
-bool runMonster() {
+//Run monster room event
+bool Floor::runMonster() {
+	//Create monster
 	//Monster monst = Monster();
 	cout << "A " << ""
 			<< " has appeared! It moves to attack you.  Defend yourself!" << endl;
@@ -158,9 +157,11 @@ bool runMonster() {
 	cout << "You have been killed.  The monster feeds on your lifeless corpse..." << endl;
 	//return false;
 
+	//Return true if successful, false if death
 	return true;
 }
 
+//Unused?
 void Floor::runLoot() {
 	int loot = (rand()%20) + 1;
 	cout << "You cautiously enter the room, but only find a simple unassuming chest. "
@@ -170,6 +171,7 @@ void Floor::runLoot() {
 
 }
 
+//Text for nothing happening
 void Floor::runNothing() {
 	cout << "You bust down the door ready to fight!" << endl;
 	cout << "....\n...\nBut nothing happens?" << endl;
@@ -177,8 +179,10 @@ void Floor::runNothing() {
 
 }
 
+//Run boss battle
 bool Floor::runBoss() {
-	//Boss boss = boss();
+	//Create boss
+	//Boss boss = Boss();
 	cout << "You crack open the door and peak through, seeing only darkness." << endl;
 	cout << "Suddenly, the door is pulled open, and you are pulled into the chamber and thrown against the opposite wall!" << endl;
 	cout << "Fire erupts along the walls, revealing a demon beyond description blocking the only entrance." << endl;
@@ -195,5 +199,8 @@ bool Floor::runBoss() {
 	cout << "The beast makes a disturbing guttural sound that could be a laugh or cheer." << endl;
 	cout << "You vision goes dark as your life fades, and you lay defeated at the foot of the monster, thankful for the release of death." << endl;
 	//return false;
+
+	//return true if success, false if death
+	return true;
 
 }
