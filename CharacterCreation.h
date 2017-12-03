@@ -34,6 +34,9 @@ class Player
 
 		//virtual ~Player() = 0;
   protected:
+	
+			//////////////////////TODO: do the constructors need inputs since we set values ahead of time?
+	
     Player (int maxHP, int lvl, int maxMana, string name)
     {
     this -> maxHP = maxHP;
