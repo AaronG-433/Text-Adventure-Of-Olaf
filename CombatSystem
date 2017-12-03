@@ -140,4 +140,74 @@ int main() {
 	return 0;
 }
 
+bool combatSystem(Player* player, monster* mon)
+{
+	//set up values for player
+	string choice = "";
+	int intChoice = 0;
+	int charHealth = player->getHealth();
+	int charMana = player->getCurMana();
+	int charDamage = player->getDmg();
+	int charDefense = player->getDef();
 
+	//set up values for monster
+	int monHealth = mon->getHP();
+	int monDamage = mon->getDAMAGE();
+	int monDefense = mon->getDEFENSE();
+	string monName = mon->getMONSTER();
+
+	//setting damage values
+	int charAttack = charDamage - monDefense;
+	if(charAttack <= 0)		//ensuring the player deals at least 1 damage
+	{
+		charAttack = 1;
+	}
+	int monAttack = monDamage - charDefense;
+	if(monAttack <= 0)		//ensuring monster deals at least 1 damage
+	{
+		monAttack = 1;
+	}
+	while(true)
+	{
+		//outputs info to user
+		cout << "You have " << charHealth << " HP and " << charDamage << " attack." <<endl;
+
+		//ask for user's choice
+		cout << "What would you like to do?\n";
+		cout << "1.) Basic Attack\n2.) Use Skill\n3.) Use Item" << endl;
+		cin >> choice;
+		//verify that it is an integer
+		intChoice = intCheck(choice);
+
+		//perform action based on user choice
+		switch(intChoice)
+		{
+			case 1: cout << "You strike the " << monName << ". It takes " << charAttack << " damage." << endl;
+					monHealth = monHealth - charAttack;
+					//check if monster is dead
+					if(monHealth <= 0)
+					{
+						return true;
+					}
+					//if not dead then monster hits player
+					cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+					player->setHealth(charHealth - monAttack);
+					charHealth = player->getHealth();
+					break;
+			case 2:			//TODO: implement skills
+					break;
+			case 3:			//TODO: instead of item do block/dodge?
+					break;
+			default: cout << "Invalid choice!" << endl;
+		}
+
+		//Check if the player is dead
+		if(charHealth <= 0)
+		{
+			return false;
+		}
+
+		//output how much health the monster has
+		cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
+	}
+}
