@@ -28,6 +28,7 @@ class Player
 		virtual int getDmg() = 0;
 		virtual void setDmg(int dmg) = 0;
 		virtual int getDef() = 0;
+		virtual void setDef(int def) = 0;
    		virtual int getCurMana() = 0;
    		virtual void setCurMana(int mana) = 0;
 		virtual int getMaxMana() = 0;
@@ -101,6 +102,7 @@ class Knight : public Player
 		int getDmg();
 		void setDmg(int dmg);
 		int getDef();
+		void setDef(int def);
 		int getCurMana();
 		int getMaxMana();
 		void setCurMana(int mana);
@@ -150,6 +152,7 @@ class Archer : public Player
 		int getDmg();
 		void setDmg(int dmg);
 		int getDef();
+		void setDef(int def);
 		int getCurMana();
 		int getMaxMana();
 		void setCurMana(int mana);
@@ -199,6 +202,7 @@ class Caster : public Player
 		int getDmg();
 		void setDmg(int dmg);
 		int getDef();
+		void setDef(int def);
 		int getCurMana();
 		int getMaxMana();
 		void setCurMana(int mana);
