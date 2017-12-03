@@ -46,78 +46,7 @@ int intCheck(string userChoice)
 	return x;
 }
 
-bool combatSystem(Player* player, boss* mon)
-{
-	//set up values for player
-	string choice = "";
-	int intChoice = 0;
-	int charHealth = player->getHealth();
-	int charMana = player->getCurMana();
-	int charDamage = player->getDmg();
-	int charDefense = player->getDef();
-
-	//set up values for monster
-	int monHealth = mon->getHPBoss();
-	int monDamage = mon->getDAMAGEBoss();
-	int monDefense = mon->getDEFENSEBoss();
-	string monName = mon->getBOSS();
-
-	//setting damage values
-	int charAttack = charDamage - monDefense;
-	if(charAttack <= 0)		//ensuring the player deals at least 1 damage
-	{
-		charAttack = 1;
-	}
-	int monAttack = monDamage - charDefense;
-	if(monAttack <= 0)		//ensuring monster deals at least 1 damage
-	{
-		monAttack = 1;
-	}
-	while(true)
-	{
-		//outputs info to user
-		cout << "You have " << charHealth << " HP and " << charDamage << " attack." <<endl;
-
-		//ask for user's choice
-		cout << "What would you like to do?\n";
-		cout << "1.) Basic Attack\n2.) Use Skill\n3.) Use Item" << endl;
-		cin >> choice;
-		//verify that it is an integer
-		intChoice = intCheck(choice);
-
-		//perform action based on user choice
-		switch(intChoice)
-		{
-			case 1: cout << "You strike the " << monName << " It takes " << charAttack << " damage." << endl;
-					monHealth = monHealth - charAttack;
-					//check if monster is dead
-					if(monHealth <= 0)
-					{
-						return true;
-					}
-					//if not dead then monster hits player
-					cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
-					player->setHealth(charHealth - monAttack);
-					charHealth = player->getHealth();
-					break;
-			case 2:			//TODO: implement skills
-					break;
-			case 3:			//TODO: instead of item do block/dodge?
-					break;
-			default: cout << "Invalid choice!" << endl;
-		}
-
-		//Check if the player is dead
-		if(charHealth <= 0)
-		{
-			return false;
-		}
-
-		//output how much health the monster has
-		cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
-	}
-}
-
+//combat for fighting normal monsters
 bool combatSystem(Player* player, monster* mon)
 {
 	//set up values for player
@@ -127,6 +56,7 @@ bool combatSystem(Player* player, monster* mon)
 	int charMana = player->getCurMana();
 	int charDamage = player->getDmg();
 	int charDefense = player->getDef();
+	int skillAttack = 0;
 
 	//set up values for monster
 	int monHealth = mon->getHP();
@@ -146,38 +76,125 @@ bool combatSystem(Player* player, monster* mon)
 		monAttack = 1;
 	}
 	while(true)
-	{
-		//outputs info to user
-		cout << "You have " << charHealth << " HP and " << charDamage << " attack." <<endl;
-
-		//ask for user's choice
-		cout << "What would you like to do?\n";
-		cout << "1.) Basic Attack\n2.) Use Skill\n3.) Use Item" << endl;
-		cin >> choice;
-		//verify that it is an integer
-		intChoice = intCheck(choice);
-
-		//perform action based on user choice
-		switch(intChoice)
 		{
-			case 1: cout << "You strike the " << monName << ". It takes " << charAttack << " damage." << endl;
-					monHealth = monHealth - charAttack;
-					//check if monster is dead
-					if(monHealth <= 0)
-					{
-						return true;
-					}
-					//if not dead then monster hits player
-					cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
-					player->setHealth(charHealth - monAttack);
-					charHealth = player->getHealth();
-					break;
-			case 2:			//TODO: implement skills
-					break;
-			case 3:			//TODO: instead of item do block/dodge?
-					break;
-			default: cout << "Invalid choice!" << endl;
-		}
+			//outputs info to user
+			cout << "You have " << charHealth << " HP, " << charDamage << " attack, and " << charMana << " mana." <<endl;
+
+			//output how much health the monster has
+			cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
+
+			//ask for user's choice
+			cout << "What would you like to do?\n";
+			cout << "1.) Basic Attack\n2.) Use Skill\n3.) Take a breather" << endl;
+			cin >> choice;
+			//verify that it is an integer
+			intChoice = intCheck(choice);
+
+			//perform action based on user choice
+			switch(intChoice)
+			{
+				case 1: cout << "You strike the " << monName << ". It takes " << charAttack << " damage." << endl;
+						monHealth = monHealth - charAttack;
+						//check if monster is dead
+						if(monHealth <= 0)
+						{
+							return true;
+						}
+						//if not dead then monster hits player
+						cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+						player->setHealth(charHealth - monAttack);
+						charHealth = player->getHealth();
+						break;
+				//getting which skill the user wants and checking if they can wield it
+				case 2:	cout << "Which skill would you like to use?\n Skill 1 for 2 mana, Skill 2 for 4, Skill 3 for 6, or Skill 4 for 8?" << endl;
+						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
+						cin >> choice;
+						intChoice = intCheck(choice);
+
+						//switch for skills
+						switch(intChoice)
+						{
+							case 1: if((skillAttack = player->skill1()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+										return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							case 2: if((skillAttack = player->skill2()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+											return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							case 3: if((skillAttack = player->skill3()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+											return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							case 4: if((skillAttack = player->skill4()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+											return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							default: cout << "Invalid skill choice!" << endl;
+						}
+						break;
+				case 3:
+						cout << "You retreat a short distance from the beast to rest your tired limbs." << endl; //healing player HP
+						charHealth = charHealth + player->getLvl();
+						player->setHealth(charHealth);
+						//restoring some player mana
+						charMana = player->getCurMana() + player->getLvl();
+						player->setCurMana(charMana);
+						cout << "Restored " << player->getLvl() << " health and mana." << endl;
+						cout << "Feeling slightly better you charge back into the fray only to get immediatley hit in your haste!" << endl;
+						player->setHealth(charHealth - monAttack);
+						charHealth = player->getHealth();
+						break;
+				default: cout << "Invalid choice!" << endl;
+			}
 
 		//Check if the player is dead
 		if(charHealth <= 0)
@@ -185,8 +202,165 @@ bool combatSystem(Player* player, monster* mon)
 			return false;
 		}
 
-		//output how much health the monster has
-		cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
+	}
+}
+
+//combat for fighting boss
+bool combatSystem(Player* player, boss* mon)
+{
+	//set up values for player
+	string choice = "";
+	int intChoice = 0;
+	int charHealth = player->getHealth();
+	int charMana = player->getCurMana();
+	int charDamage = player->getDmg();
+	int charDefense = player->getDef();
+	int skillAttack = 0;
+
+	//set up values for monster
+	int monHealth = mon->getHPBoss();
+	int monDamage = mon->getDAMAGEBoss();
+	int monDefense = mon->getDEFENSEBoss();
+	string monName = mon->getBOSS();
+
+	//setting damage values
+	int charAttack = charDamage - monDefense;
+	if(charAttack <= 0)		//ensuring the player deals at least 1 damage
+	{
+		charAttack = 1;
+	}
+	int monAttack = monDamage - charDefense;
+	if(monAttack <= 0)		//ensuring monster deals at least 1 damage
+	{
+		monAttack = 1;
+	}
+	while(true)
+			{
+			//outputs info to user
+			cout << "You have " << charHealth << " HP, " << charDamage << " attack, and " << charMana << " mana." <<endl;
+
+			//output how much health the monster has
+			cout << "The vile " << monName << " still has " << monHealth << " HP left!" << endl;
+
+			//ask for user's choice
+			cout << "What would you like to do?\n";
+			cout << "1.) Basic Attack\n2.) Use Skill\n3.) Take a breather" << endl;
+			cin >> choice;
+			//verify that it is an integer
+			intChoice = intCheck(choice);
+
+			//perform action based on user choice
+			switch(intChoice)
+			{
+				case 1: cout << "You strike the " << monName << ". It takes " << charAttack << " damage." << endl;
+						monHealth = monHealth - charAttack;
+						//check if monster is dead
+						if(monHealth <= 0)
+						{
+							return true;
+						}
+						//if not dead then monster hits player
+						cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+						player->setHealth(charHealth - monAttack);
+						charHealth = player->getHealth();
+						break;
+				//getting which skill the user wants and checking if they can wield it
+				case 2:	cout << "Which skill would you like to use?\n Skill 1 for 2 mana, Skill 2 for 4, Skill 3 for 6, or Skill 4 for 8?" << endl;
+						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
+						cin >> choice;
+						intChoice = intCheck(choice);
+
+						//switch for skills
+						switch(intChoice)
+						{
+							case 1: if((skillAttack = player->skill1()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+										return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							case 2: if((skillAttack = player->skill2()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+											return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							case 3: if((skillAttack = player->skill3()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+											return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							case 4: if((skillAttack = player->skill4()) != -1)
+									{
+										monHealth = monHealth - skillAttack;
+										//check if monster is dead
+										if(monHealth <= 0)
+										{
+											return true;
+										}
+										//if not dead then monster hits player
+										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
+										player->setHealth(charHealth - monAttack);
+										charHealth = player->getHealth();
+										charMana = player->getCurMana();
+									}
+									else {cout << "Not enough mana/ not high enough level!" << endl;}
+									break;
+							default: cout << "Invalid skill choice!" << endl;
+						}
+						break;
+				case 3:
+						cout << "You retreat a short distance from the beast to rest your tired limbs." << endl; //healing player HP
+						charHealth = charHealth + player->getLvl();
+						player->setHealth(charHealth);
+						//restoring some player mana
+						charMana = player->getCurMana() + player->getLvl();
+						player->setCurMana(charMana);
+						cout << "Restored " << player->getLvl() << " health and mana." << endl;
+						cout << "Feeling slightly better you charge back into the fray only to get immediatley hit in your haste!" << endl;
+						player->setHealth(charHealth - monAttack);
+						charHealth = player->getHealth();
+						break;
+				default: cout << "Invalid choice!" << endl;
+			}
+
+		//Check if the player is dead
+		if(charHealth <= 0)
+		{
+			return false;
+		}
+
 	}
 }
 
@@ -537,8 +711,7 @@ int boss::getDEFENSEBoss(){
 */
 #include <iostream>
 #include <string>
-#include "CharacterCreation.h"				/////////////////////////Don't forget to include the header!
-
+#include "CharacterCreation.h"
 
 //Defining the methods inherited from the abstract Player class
 int Knight::getDmg()
@@ -553,8 +726,7 @@ int Knight::getDef()
 {
   return this->def;
 }
-void Knight::setDef(int def)
-{
+void Knight::setDef(int def) {
 	this->def = def;
 }
 int Knight::getCurMana()
@@ -615,7 +787,7 @@ string Knight::getClass()
 }
 
 //Skill: returns an int for now, can become its own algorithm though
-int Knight::styleishSpin()
+int Knight::skill1()
 {
   if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
   {
@@ -623,12 +795,13 @@ int Knight::styleishSpin()
   }
   else
   {
+	  cout << "Styleish Spin!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Knight::shieldBash()
+int Knight::skill2()
 {
   if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
   {
@@ -636,11 +809,12 @@ int Knight::shieldBash()
   }
   else
   {
+	  cout << "Shield Bash!" << endl;
      curMana = curMana - 4;
 	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
-int Knight::demacianJudgement()
+int Knight::skill3()
 {
   if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
   {
@@ -648,12 +822,13 @@ int Knight::demacianJudgement()
   }
   else
   {
+	  cout << "Demacian Judgment!" << endl;
      curMana = curMana - 6;
      return 4 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Knight::foolishCourage()
+int Knight::skill4()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
   {
@@ -661,6 +836,7 @@ int Knight::foolishCourage()
   }
   else
   {
+	  cout << "'SQUARE UP!!!' You yell as you charge headlong at the monster." << endl;
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -680,8 +856,7 @@ int Archer::getDef()
 {
   return this->def;
 }
-void Archer::setDef(int def)
-{
+void Archer::setDef(int def) {
 	this->def = def;
 }
 int Archer::getCurMana()
@@ -742,7 +917,7 @@ string Archer::getClass()
 }
 
 //Skill: returns an int for now, can become its own algorithm though
-int Archer::snipe()
+int Archer::skill1()
 {
   if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
   {
@@ -750,12 +925,13 @@ int Archer::snipe()
   }
   else
   {
+	 cout << "Snipe!" << endl;
      curMana = curMana - 2;
-	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
+	 return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Archer::luckyShot()
+int Archer::skill2()
 {
   if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
   {
@@ -763,11 +939,12 @@ int Archer::luckyShot()
   }
   else
   {
+	  cout << "Lucky Shot!" << endl;
      curMana = curMana - 4;
 	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
-int Archer::hailMary()
+int Archer::skill3()
 {
   if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
   {
@@ -775,13 +952,14 @@ int Archer::hailMary()
   }
   else
   {
+	  cout << "Hail Mary!" << endl;
      curMana = curMana - 6;
      return 4 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
 
-int Archer::oneInAMillion()
+int Archer::skill4()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
   {
@@ -789,6 +967,7 @@ int Archer::oneInAMillion()
   }
   else
   {
+	  cout << "'Well, here goes nothing!' You shout as you fire wildly at the beast." << endl;
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -800,7 +979,7 @@ int Caster::getDmg()
 {
   return this->dmg;
 }
-void Caster::setDmg(int dmg)
+void Caster::setDmg(int  dmg)
 {
 	this->dmg = dmg;
 }
@@ -869,7 +1048,7 @@ string Caster::getClass()
 }
 
 //Skill: returns an int for now, can become its own algorithm though
-int Caster::balefulStrike()
+int Caster::skill1()
 {
   if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
   {
@@ -877,12 +1056,13 @@ int Caster::balefulStrike()
   }
   else
   {
+	  cout << "Baleful Strike!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Caster::darkMatter()
+int Caster::skill2()
 {
   if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
   {
@@ -890,11 +1070,12 @@ int Caster::darkMatter()
   }
   else
   {
+	  cout << "Dark Matter!" << endl;
      curMana = curMana - 4;
 	   return 3 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
-int Caster::eventHorizon()
+int Caster::skill3()
 {
   if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
   {
@@ -902,12 +1083,13 @@ int Caster::eventHorizon()
   }
   else
   {
+	  cout << "Event Horizon!" << endl;
      curMana = curMana - 6;
      return 4 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
 
-int Caster::primordialBurst()
+int Caster::skill4()
 {
   if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
   {
@@ -915,21 +1097,29 @@ int Caster::primordialBurst()
   }
   else
   {
+	  cout << "'Face my ultimate spell!!!' You declare as you lob a massive ball of energy at the beast." << endl;
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
 }
+
 
 //Creates the story and accesses different parts
 
 Player* chooseClass() {
 
 	cout << "Choose your class:\n1: Archer\n2: Caster\n3: Knight" << endl;
-	int choice = 0;
-	cin >> choice;
+	string choice = "";
+	int intChoice = 0;
+
+
 	//Needs to be idiot proofed
+	cin >> choice;
+	intChoice = intCheck(choice);
+
+
 	Player *hero;
-	switch (choice) {
+	switch (intChoice) {
 	case 1:
 		hero = new Archer(10, 1, 10, "");
 		break;
@@ -939,7 +1129,11 @@ Player* chooseClass() {
 	case 3:
 		hero = new Knight(10, 1, 10, "");
 		break;
+	default:
+		cout << "Invalid Input!" << endl;
+
 	}
+
 	return hero;
 }
 
