@@ -1,4 +1,5 @@
-#ifndef monster_H
+
+ #ifndef monster_H
 #define monster_H
 #include <iostream>
 #include <string>
@@ -27,12 +28,12 @@ private:
 	int loot;
 
 public:
-	monster();
+	monster(int level);
 	//Setters
 	string setMONSTER();
-	int setHP();
-	int setDAMAGE();
-	int setDEFENSE();
+	int setHP(int level);
+	int setDAMAGE(int level);
+	int setDEFENSE(int level);
 	int setLOOT();
 
 	//Getters
@@ -44,11 +45,12 @@ public:
 };
 
 //Monster Constructor
-monster::monster(){
+monster::monster(int level){
+
 	name =setMONSTER();
-	hp =setHP();
-	damage =setDAMAGE();
-	defense =setDEFENSE();
+	hp =setHP(level);
+	damage =setDAMAGE(level);
+	defense =setDEFENSE(level);
 	loot =setLOOT();
 }
 
