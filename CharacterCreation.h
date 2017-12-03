@@ -32,7 +32,7 @@ class Player
     		virtual int getMaxMana() = 0;
     		virtual void setLvl(int lvl) = 0;
 
-		//virtual ~Player() = 0;
+		virtual ~Player() {};				//////////////Added {} instead of =0 and we good
   protected:
 	
 			//////////////////////TODO: do the constructors need inputs since we set values ahead of time?
