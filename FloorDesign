@@ -81,7 +81,7 @@ bool Floor::run() {
 	int outcome = 0;
 	//int loot = 0;
 	//Run shop and check if the method runs
-	if(this->runShop()) {
+	if(this->runShop()) {					/////////////Remove shope check
 		//If not the boss level
 		if(level < 5) {
 			//Run through each room
@@ -90,11 +90,13 @@ bool Floor::run() {
 				outcome = rand()%10;
 				
 				if(outcome >= 0 && outcome < 5) {
+				
+					///////////////////////////TODO: create switch method to choose to fight or wait(waiting does nothing) w/in while loop
+				
 					//Call monster method and check if they survived
 					if(!this->runMonster()) {
 						fail = true;
 						return false;
-						break;
 					}
 
 					//Run loot method
@@ -102,6 +104,9 @@ bool Floor::run() {
 					this->runLoot();
 					//Run nothing method
 				} else if(outcome == 9) {
+				
+					///////////////TODO: create switch for nothing choices w/in while loop
+				
 					this->runNothing();
 				}
 			}
