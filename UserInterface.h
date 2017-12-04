@@ -7,9 +7,18 @@ using namespace std;
 #include <string>
 #include <sstream>
 #include <cctype>
-#include "FloorDesign.h"
-#include "CharacterCreation.h"
-//#include "MonsterGeneration.h"
+
+
+//initialized variables
+int monsterCount = 0;
+int lootCount = 0;
+int goldCount = 0;
+vector<string> achievementRecorder;
+int timeTaken1 = 0;
+int timeTaken2 = 0;
+
+
+#include "FloorDesign.cpp"
 
 
 
