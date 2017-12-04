@@ -6,7 +6,7 @@ using namespace std;
 #include <vector>
 #include <string>
 #include <sstream>
-#include <ctype>
+#include <cctype>
 //#include "FloorDesign.h"
 //#include "CharacterCreation.h"
 //#include "MonsterGeneration.h"
