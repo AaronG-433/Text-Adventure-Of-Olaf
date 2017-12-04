@@ -2,6 +2,7 @@
 #define UserInterface_h
 using namespace std;
 #include <string.h>
+#include <chrono>
 
 class UserInterface {
 private:
