@@ -1,5 +1,4 @@
-
- #ifndef monster_H
+#ifndef monster_H
 #define monster_H
 #include <iostream>
 #include <string>
