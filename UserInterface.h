@@ -35,9 +35,7 @@ public:
     void setStoryPart (int part);
     void finishLvl(int part);
     void beginEnd(int x);
-    void elipsis();
     void opener(const string& message);
-    void lag(int n);
 
 
 
