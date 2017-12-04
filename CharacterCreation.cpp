@@ -5,7 +5,7 @@
 
 #include "CharacterCreation.h"
 
-//Defining the methods inherited from the abstract Player class
+//Defining the methods inherited from the abstract Player class, Mutator and Accessor Methods
 int Knight::getDmg()
 {
   return this->dmg;
@@ -49,6 +49,9 @@ void Knight::setLvl(int lvl)
 {
   (this->lvl) = lvl;
 }
+/*This method increases the stats of the player when he levels up.
+*@param floolLevel is the floor that the player levels up on 
+*/
 void Knight::lvlUp(int floorLevel)
 {
   this->setLvl(this->getLvl()+1);
@@ -135,7 +138,7 @@ int Knight::skill4()
 }
 
 
-//Defining the methods inherited from the abstract Player class
+//Defining the methods inherited from the abstract Player class, Mostly consists of mutator and accessor methods
 int Archer::getDmg()
 {
   return this->dmg;
@@ -179,6 +182,9 @@ void Archer::setLvl(int lvl)
 {
   (this->lvl) = lvl;
 }
+/*This method increases the stats of the player when he levels up.
+*@param floolLevel is the floor that the player levels up on 
+*/
 void Archer::lvlUp(int floorLevel)
 {
   this->setLvl(this->getLvl()+1);
@@ -266,7 +272,7 @@ int Archer::skill4()
 }
 
 
-//Defining the methods inherited from the abstract Player class
+//Defining the methods inherited from the abstract Player class, mostly consists of mutator and accessor methods
 int Caster::getDmg()
 {
   return this->dmg;
@@ -310,6 +316,9 @@ void Caster::setLvl(int lvl)
 {
   (this->lvl) = lvl;
 }
+/*This method increases the stats of the player when he levels up.
+*@param floolLevel is the floor that the player levels up on 
+*/
 void Caster::lvlUp(int floorLevel)
 {
   this->setLvl(this->getLvl()+1);
