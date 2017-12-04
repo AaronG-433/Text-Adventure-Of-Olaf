@@ -41,11 +41,13 @@ class Player
 		virtual int skill3() = 0;
 		virtual int skill4() = 0;
 
-						//////////////Added {} instead of =0 and we good
+						
   protected:
-	~Player() {};
-			//////////////////////TODO: do the constructors need inputs since we set values ahead of time?
-
+	~Player() {}; //The destructor to be inherited
+			
+/*The abstract constructor which is only called in the constructors of the subclasses.
+*Also defines the players name in it
+*/
     Player (int maxHP, int lvl, int maxMana, string name)
     {
     this -> maxHP = maxHP;
@@ -65,7 +67,7 @@ class Player
 		int mana = 10;
 		string name;
     		int maxMana = 10;
-		//vector<string> achievementRecorder;
+		
 
 };
 
@@ -217,35 +219,5 @@ class Caster : public Player
 		}
 
 };
-
-
-//If we use this, we can turn this into selecting a class to spawn
-
-/*
-void chooseClass(Player* player, String* class)
-{
-	int classDecision = 0;
-	//Force the player to input a correct input that leads to a valid class which is set with a seperate method.
-	while((classDecision < 1) || (classDecision > 3) || (int(classDecision) != classDecision))
-	{
-		cout << "What class will you choose? Will you be a Knight[1], a Caster[2], or an Archer	[3]?" << endl;
-		cin >> 	classDecision;
-		switch(classDecision)
-		{
-		case 1:
-			player.setKnightClass();
-			break;
-		case 2:
-			player.setCasterClass();
-			break;
-		case 3:
-			player.setArcherClass();
-			break;
-		default:
-			cout << "Please choose one of the classes available!" << endl;
-		}
-	}
-}
-*/
 
 #endif
