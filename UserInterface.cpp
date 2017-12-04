@@ -230,11 +230,7 @@ void UserInterface::elipsis() {
 }
 
 void UserInterface::opener(const string& message) {
-    for (const char c: message) {
-        cout << c;
-        //lag(1);
-        //std::this_thread::sleep_for (std::chrono::milliseconds(125));
-    }
+    cout << message << endl;
 }
 
 //n = 5 for about 1 second and n = 15 for about 4 second break.
