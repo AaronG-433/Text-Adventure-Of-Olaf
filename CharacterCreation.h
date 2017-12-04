@@ -107,7 +107,7 @@ class Knight : public Player
 		int getMaxMana();
 		void setCurMana(int mana);
 		void setMaxMana(int maxMana);
-	//~Knight();
+	~Knight();
       //Constructor for subclass knight
 		Knight(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
 		{
@@ -157,7 +157,7 @@ class Archer : public Player
 		int getMaxMana();
 		void setCurMana(int mana);
 		void setMaxMana(int maxMana);
-	//~Archer();
+	~Archer();
       //Constructor for subclass knight
 		Archer(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
 		{
@@ -207,7 +207,7 @@ class Caster : public Player
 		int getMaxMana();
 		void setCurMana(int mana);
 		void setMaxMana(int maxMana);
-	//~Caster();
+	~Caster();
       //Constructor for subclass knight
 		Caster(int maxHP, int lvl, int maxMana, string name): Player(maxHP,lvl, maxMana,name)
 		{
