@@ -65,7 +65,7 @@ class Player
 		int mana = 10;
 		string name;
     		int maxMana = 10;
-		vector<string> achievementRecorder;
+		//vector<string> achievementRecorder;
 
 };
 
