@@ -5,6 +5,8 @@ using namespace std;
 #include <string.h>
 #include <vector>
 #include <string>
+#include <sstream>
+#include <ctype>
 //#include "FloorDesign.h"
 //#include "CharacterCreation.h"
 //#include "MonsterGeneration.h"
