@@ -2,6 +2,15 @@
 *Created By: Dylan Alvarez
 *Contains:The methods that go with the classes defined by the Character_Creation_H
 */
+#include "FloorDesign.h"
+#include "CombatSystem.h"
+#include "MonsterGeneration.h"
+#include "CharacterCreation.h"
+#include "UserInterface.h"
+#include "FloorDesign.cpp"
+#include "CombatSystem.cpp"
+#include "MonsterGeneration.cpp"
+#include "CharacterCreation.cpp"
 #include <iostream>
 #include <string>
 #include "CharacterCreation.h"
