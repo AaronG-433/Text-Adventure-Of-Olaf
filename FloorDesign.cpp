@@ -1,4 +1,6 @@
 #include "FloorDesign.h"
+#include <cstdlib>
+using namespace std;
 
 
 //Will also take the character as a parameter
