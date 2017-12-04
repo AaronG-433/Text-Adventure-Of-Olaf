@@ -1,3 +1,5 @@
+#include "FloorDesign.h"
+
 //Will also take the character as a parameter
 Floor::Floor(int level, Player* hero) {
 	this->level = level;
