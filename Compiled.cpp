@@ -19,11 +19,6 @@
 #include "MonsterGeneration.h"
 #include "CharacterCreation.h"
 #include "UserInterface.h"
-#include "FloorDesign.cpp"
-#include "CombatSystem.cpp"
-#include "MonsterGeneration.cpp"
-#include "CharacterCreation.cpp"
-
 
 int monsterCount = 0;
 int lootCount = 0;
