@@ -2,9 +2,9 @@
 #define UserInterface_h
 using namespace std;
 #include <string.h>
-#include "FloorDesign.h"
-#include "CharacterCreation.h"
-#include "MonsterGeneration.h"
+//#include "FloorDesign.h"
+//#include "CharacterCreation.h"
+//#include "MonsterGeneration.h"
 
 
 
