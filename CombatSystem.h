@@ -3,7 +3,7 @@
  * CombatSystem.h
  *
  *  Created on: Nov 30, 2017
- *      Author: Owner
+ *      Author: Aaron Gaskin
  */
 
 
