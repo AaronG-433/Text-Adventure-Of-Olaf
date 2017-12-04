@@ -12,8 +12,8 @@ using namespace std;
 #include <string>
 #include <sstream>		//imports the stringstream function
 #include <cctype>		//imports the isspace() function
-#include "CharacterCreation.h"
-#include "MonsterGeneration.h"
+//#include "CharacterCreation.h"
+//#include "MonsterGeneration.h"
 
 
 class CombatSystem {
