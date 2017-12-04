@@ -1,3 +1,23 @@
+#include "floorDesign.h"
+#include "combatSystem.h"
+#include "monsterGeneration.h"
+#include "characterCreation.h"
+#include "userInterface.h"
+#include "floorDesign.cpp"
+#include "combatSystem.cpp"
+#include "monsterGeneration.cpp"
+#include "characterCreation.cpp"
+
+
+
+int monsterCount = 0;
+int lootCount = 0;
+int goldCount = 0;
+vector<string> achievementRecorder;
+int timeTaken1 = 0;
+int timeTaken2 = 0;
+
+
 bool UserInterface:: createStory () {
     int part = this->storyPart;
     string partc;
