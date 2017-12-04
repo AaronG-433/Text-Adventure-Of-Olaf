@@ -1,6 +1,7 @@
 #ifndef UserInterface_h
 #define UserInterface_h
 using namespace std;
+#include <iostream>
 #include <string.h>
 #include <vector>
 #include <string>
