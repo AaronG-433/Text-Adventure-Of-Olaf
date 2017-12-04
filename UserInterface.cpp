@@ -11,6 +11,37 @@ vector<string> achievementRecorder;
 int timeTaken1 = 0;
 int timeTaken2 = 0;
 
+Player* chooseClass() {
+
+	cout << "Choose your class:\n1: Archer\n2: Caster\n3: Knight" << endl;
+	string choice = "";
+	int intChoice = 0;
+
+
+	//Needs to be idiot proofed
+	cin >> choice;
+	intChoice = intCheck(choice);
+
+
+	Player *hero;
+	switch (intChoice) {
+	case 1:
+		hero = new Archer(10, 1, 10, "");
+		break;
+	case 2:
+		hero = new Caster(10, 1, 10, "");
+		break;
+	case 3:
+		hero = new Knight(10, 1, 10, "");
+		break;
+	default:
+		cout << "Invalid Input!" << endl;
+	}
+	achievementRecorder.push_back("Character Created - Doing the bare minimum");
+
+
+	return hero;
+}
 
 bool UserInterface:: createStory () {
     int part = this->storyPart;
