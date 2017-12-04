@@ -1,54 +1,5 @@
 
 #include "UserInterface.h"
-//#include "FloorDesign.cpp"
-//#include "CharacterCreation.cpp"
-
-
-
-int monsterCount = 0;
-int lootCount = 0;
-int goldCount = 0;
-vector<string> achievementRecorder;
-int timeTaken1 = 0;
-int timeTaken2 = 0;
-
-/******************
- * Name: intCheck
- * Needs: string
- * Outputs: int
- * Purpose: checks a string of user input to verify that it is an integer
- ******************/
-int intCheck(string userChoice)
-{
-	//initializing variables for later use
-	bool check = true;
-	int x = 0;
-
-	//loop that checks the users choice is an int
-	do
-	{
-		//parsing input string to determine if it's an int
-		//copied from my pa1.cpp assignment
-		//obtained from stack Overflow "Check if the input is a number or string in C++"
-		stringstream userParse(userChoice);
-
-		//checking if the parse can be put into an int
-		if(!(userParse >> x).fail())
-		{
-			userParse >> x;			//passing parse value to x
-			check = false;
-		}
-		else			//if parse test fails, asks user for an integer
-		{
-			cout << "Invalid input!" << "\n" << "Please enter a valid integer: ";
-			cin >> userChoice;
-		}
-	}while(check);
-
-	//return valid integer
-	return x;
-}
-
 
 Player* chooseClass() {
 
