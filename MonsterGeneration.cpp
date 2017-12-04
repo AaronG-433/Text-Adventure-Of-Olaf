@@ -1,14 +1,5 @@
 #include "MonsterGeneration.h"
-#include "FloorDesign.h"
-#include "FloorDesign.h"
-#include "CombatSystem.h"
-#include "MonsterGeneration.h"
-#include "CharacterCreation.h"
-#include "UserInterface.h"
-#include "FloorDesign.cpp"
-#include "CombatSystem.cpp"
-#include "MonsterGeneration.cpp"
-#include "CharacterCreation.cpp"
+
 using namespace std;
 
 //int floorLevel =1;
