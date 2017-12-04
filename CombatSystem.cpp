@@ -6,8 +6,6 @@
 //============================================================================
 
 #include "CombatSystem.h"
-//#include "CharacterCreation.cpp"
-//#include "MonsterGeneration.cpp"
 
 /******************
  * Name: intCheck
