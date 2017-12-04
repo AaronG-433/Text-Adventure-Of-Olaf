@@ -41,9 +41,9 @@ class Player
 		virtual int skill3() = 0;
 		virtual int skill4() = 0;
 
-		virtual ~Player() {};				//////////////Added {} instead of =0 and we good
+						//////////////Added {} instead of =0 and we good
   protected:
-
+	~Player() {};
 			//////////////////////TODO: do the constructors need inputs since we set values ahead of time?
 
     Player (int maxHP, int lvl, int maxMana, string name)
