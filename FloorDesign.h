@@ -1,25 +1,35 @@
-
 /*
- * FloorDesign.h
+ * floor.h
  *
  *  Created on: Nov 30, 2017
- *      Author: Owner
+ *      Author: Alex Jasper
  */
+
+#ifndef FLOOR_H_
+#define FLOOR_H_
+
+
+
+
+
+#endif /* FLOOR_H_ */
 
 #include <cstdlib>
 #include <iostream>
-//#include "CombatSystem.cpp"
-//#include "CharacterCreation.cpp"
-#include "MonsterGeneration.cpp"
+#include <ctime>
+#include "characterCreation.h"
+#include <chrono>
+#include <thread>
+#include <climits>
+using namespace::std;
 
 class Floor {
 private:
 	int level;
-	//Character hero;
+	Player* hero;
 
 public:
-	Floor(int level);
-	int getLevel();		//added getLevel() for monsterGeneration
+	Floor(int level, Player* hero);
 	bool run();
 	bool runShop();
 	void runStairs();
@@ -27,5 +37,6 @@ public:
 	void runLoot();
 	void runNothing();
 	bool runBoss();
+	int getLevel();
 
 };
