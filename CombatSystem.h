@@ -8,6 +8,8 @@
 
 
 using namespace std;
+#include "CharacterCreation.cpp"
+#include "MonsterGeneration.cpp"
 #include <iostream>
 #include <string>
 #include <sstream>		//imports the stringstream function
