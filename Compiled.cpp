@@ -12,7 +12,6 @@
 #include "userInterface.h"
 #include <thread>
 #include <Windows.h>
-#include <chrono>
 #include <iostream>
 #include "FloorDesign.h"
 #include "CombatSystem.h"
@@ -562,7 +561,7 @@ bool Floor::runMonster() {
 		cout << "You find " << monst->getLOOT() << " loot on the monster's corpse.  Well earned." << endl;
 		cout << "You move on with " << hero->getHealth() << " health and " << hero->getCurMana() << " mana." << endl;
 		lootCount += monst->getLOOT();
-		std::chrono::duration<int, std::milli> timespan(1000);
+		//std::chrono::duration<int, std::milli> timespan(1000);
 		char choice;
 		do {
 			cout << "Press c to continue." << endl;
@@ -572,7 +571,7 @@ bool Floor::runMonster() {
 	} else {
 		//If fail
 		cout << "You have been killed.  The monster feeds on your lifeless corpse..." << endl;
-		std::chrono::duration<int, std::milli> timespan(1000);
+		//std::chrono::duration<int, std::milli> timespan(1000);
 		char choice;
 		do {
 			cout << "Press c to continue...to the afterlife" << endl;
@@ -599,7 +598,7 @@ void Floor::runLoot() {
 					 << "You take it and run." << endl;
 	//Store loot
 
-	std::chrono::duration<int, std::milli> timespan(1000);
+	//std::chrono::duration<int, std::milli> timespan(1000);
 	//sleep_for(std::chrono::seconds(1));
 	char choice;
 	do {
@@ -613,7 +612,7 @@ void Floor::runNothing() {
 	cout << "You bust down the door ready to fight!" << endl;
 	cout << "....\n...\nBut nothing happens?" << endl;
 	cout << "You continue on, confused and slightly disappointed." << endl;
-	std::chrono::duration<int, std::milli> timespan(1000);
+	//std::chrono::duration<int, std::milli> timespan(1000);
 	char choice;
 	do {
 		cout << "Press c to continue." << endl;
