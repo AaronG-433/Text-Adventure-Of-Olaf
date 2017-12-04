@@ -365,12 +365,12 @@ bool combatSystem(Player* player, boss* mon)
 	}
 }
 
-int main()
-{
-	Player* player;
-	player = new Archer(10,5,10,"");
-	monster* mon = new monster(5);
-	combatSystem(player, mon);
+//int main()
+//{
+//	Player* player;
+//	player = new Archer(10,5,10,"");
+//	monster* mon = new monster(5);
+//	combatSystem(player, mon);
 
-	return 0;
-}
+//	return 0;
+//}
