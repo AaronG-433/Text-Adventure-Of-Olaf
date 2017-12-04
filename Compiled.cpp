@@ -14,6 +14,15 @@
 #include <Windows.h>
 #include <chrono>
 #include <iostream>
+#include "FloorDesign.h"
+#include "CombatSystem.h"
+#include "MonsterGeneration.h"
+#include "CharacterCreation.h"
+#include "UserInterface.h"
+#include "FloorDesign.cpp"
+#include "CombatSystem.cpp"
+#include "MonsterGeneration.cpp"
+#include "CharacterCreation.cpp"
 
 
 int monsterCount = 0;
