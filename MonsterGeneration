@@ -1,5 +1,5 @@
 #include "MonsterGeneration.h"
-#include "Floor.h"
+#include "FloorDesign.h"
 using namespace std;
 
 //int floorLevel =1;
