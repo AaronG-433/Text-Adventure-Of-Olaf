@@ -15,6 +15,14 @@
 #include <chrono>
 #include <iostream>
 
+
+int monsterCount = 0;
+int lootCount = 0;
+int goldCount = 0;
+vector<string> achievementRecorder;
+int timeTaken1 = 0;
+int timeTaken2 = 0;
+
 int intCheck(string userChoice)
 {
 	//initializing variables for later use
@@ -106,7 +114,7 @@ bool combatSystem(Player* player, monster* mon)
 						charHealth = player->getHealth();
 						break;
 				//getting which skill the user wants and checking if they can wield it
-				case 2:	cout << "Which skill would you like to use?\n Skill 1 for 2 mana, Skill 2 for 4, Skill 3 for 6, or Skill 4 for 8?" << endl;
+				case 2:	cout << "Which skill would you like to use?\n Skill [1] for 2 mana, Skill [2] for 4 mana, Skill [3] for 6 mana, or Skill [4] for 8 mana?" << endl;
 						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
 						cin >> choice;
 						intChoice = intCheck(choice);
@@ -120,7 +128,8 @@ bool combatSystem(Player* player, monster* mon)
 										//check if monster is dead
 										if(monHealth <= 0)
 										{
-										return true;
+
+											return true;
 										}
 										//if not dead then monster hits player
 										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
@@ -200,6 +209,8 @@ bool combatSystem(Player* player, monster* mon)
 		if(charHealth <= 0)
 		{
 			return false;
+		} else {
+
 		}
 
 	}
@@ -265,7 +276,7 @@ bool combatSystem(Player* player, boss* mon)
 						charHealth = player->getHealth();
 						break;
 				//getting which skill the user wants and checking if they can wield it
-				case 2:	cout << "Which skill would you like to use?\n Skill 1 for 2 mana, Skill 2 for 4, Skill 3 for 6, or Skill 4 for 8?" << endl;
+				case 2:	cout << "Which skill would you like to use?\n Skill [1] for 2 mana, Skill [2] for 4 mana, Skill [3] for 6 mana, or Skill [4] for 8 mana?" << endl;
 						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
 						cin >> choice;
 						intChoice = intCheck(choice);
@@ -511,6 +522,19 @@ void Floor::runStairs() {
 		cout << "Press c to continue." << endl;
 		cin >> choice;
 	} while(choice != 'c');
+
+	if(this->level == 4) {
+		char partc;
+
+
+		if(hero->getName().compare("Olaf") == 0) {
+			cout << "You have called upon the ancient weapon of house Olaf, the holy blade of Fuck You" << endl;
+			hero->setDmg(1569325055);
+		}
+
+		achievementRecorder.push_back("Cleared floor 4!");
+
+	}
 }
 
 //Run monster room event
@@ -528,10 +552,12 @@ bool Floor::runMonster() {
 
 
 	if(combatSystem(this->hero, monst)) {
+		cout << "Monster slain" << endl;
+		monsterCount++;
 		cout << "You have defeated the monster! Most impressive." << endl;
 		cout << "You find " << monst->getLOOT() << " loot on the monster's corpse.  Well earned." << endl;
 		cout << "You move on with " << hero->getHealth() << " health and " << hero->getCurMana() << " mana." << endl;
-
+		lootCount += monst->getLOOT();
 		std::chrono::duration<int, std::milli> timespan(1000);
 		char choice;
 		do {
@@ -563,6 +589,7 @@ void Floor::runLoot() {
 	time(&timer);
 	srand(timer);
 	int loot = (rand()%20) + 1;
+	goldCount += loot;
 	cout << "You cautiously enter the room, but only find a simple unassuming chest. "
 			<< "You open the chest to find " << loot << " gold coins! "
 					 << "You take it and run." << endl;
@@ -606,6 +633,7 @@ bool Floor::runBoss() {
 	if (combatSystem(this->hero, Olaf)) {
 		//If Victory (lol)
 		cout << "You have apparently hacked the game.  Well done I suppose.  Take your loot and get out." << endl;
+		achievementRecorder.push_back("Hacker -_-");
 		return true;
 	} else {
 		//When failure
@@ -799,13 +827,13 @@ string Knight::getClass()
 //Skill: returns an int for now, can become its own algorithm though
 int Knight::skill1()
 {
-  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 2) || (curMana < 2)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
   else
   {
-	  cout << "Styleish Spin!" << endl;
+	  cout << "Stylish Spin!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -813,7 +841,7 @@ int Knight::skill1()
 
 int Knight::skill2()
 {
-  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 3) || (curMana < 4)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -826,7 +854,7 @@ int Knight::skill2()
 }
 int Knight::skill3()
 {
-  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 4) || (curMana < 6)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -840,7 +868,7 @@ int Knight::skill3()
 
 int Knight::skill4()
 {
-  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 5) || (curMana < 8)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -929,7 +957,7 @@ string Archer::getClass()
 //Skill: returns an int for now, can become its own algorithm though
 int Archer::skill1()
 {
-  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 2) || (curMana < 2)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -943,7 +971,7 @@ int Archer::skill1()
 
 int Archer::skill2()
 {
-  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 3) || (curMana < 4)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -956,7 +984,7 @@ int Archer::skill2()
 }
 int Archer::skill3()
 {
-  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 4) || (curMana < 6)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -971,7 +999,7 @@ int Archer::skill3()
 
 int Archer::skill4()
 {
-  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 5) || (curMana < 8)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -1060,7 +1088,8 @@ string Caster::getClass()
 //Skill: returns an int for now, can become its own algorithm though
 int Caster::skill1()
 {
-  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+
+  if((this->getLvl() < 2) || (curMana < 2)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -1074,7 +1103,7 @@ int Caster::skill1()
 
 int Caster::skill2()
 {
-  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 3) || (curMana < 4)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -1087,7 +1116,7 @@ int Caster::skill2()
 }
 int Caster::skill3()
 {
-  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 4) || (curMana < 6)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -1101,7 +1130,7 @@ int Caster::skill3()
 
 int Caster::skill4()
 {
-  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 5) || (curMana < 8)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -1141,14 +1170,14 @@ Player* chooseClass() {
 		break;
 	default:
 		cout << "Invalid Input!" << endl;
-
 	}
+	achievementRecorder.push_back("Character Created - Doing the bare minimum");
 
 
 	return hero;
 }
 
-void UserInterface:: createStory () {
+bool UserInterface:: createStory () {
     int part = this->storyPart;
     string partc;
     Player* hero;
@@ -1190,7 +1219,9 @@ void UserInterface:: createStory () {
     	parta = " ";
     	//cout << "Test2 Floor 1" << endl;
     	floor = new Floor(1, hero);
-    	floor->run();
+    	if(!floor->run()) {
+    		return false;
+    	}
 
         cout << "\n\nSomething lurks in the shadows.. A MONSTER STRIKES!? What hellish nightmare is this? As your panic heightens, as does a surge of energy through your veins. You remember your years training. Kill or be killed.\n\n";
     }
@@ -1212,7 +1243,9 @@ void UserInterface:: createStory () {
     	            }
     	        parta = " ";
     	floor = new Floor(2, hero);
-    	floor->run();
+    	if(!floor->run()) {
+    		return false;
+    	}
         cout << "";
     } else if (part == 3) {
     	string parta = "";
@@ -1233,14 +1266,21 @@ void UserInterface:: createStory () {
     	            }
     	        parta = " ";
     	floor = new Floor(3, hero);
-    	floor->run();
+    	if(!floor->run()) {
+    	    		return false;
+    	    	}
     } else if (part == 4) {
     	floor = new Floor(4, hero);
-    	floor->run();
+    	if(!floor->run()) {
+    	    		return false;
+    	    	}
     } else if (part == 5) {
     	floor = new Floor(5, hero);
-    	floor->run();
+    	if(!floor->run()) {
+    	    		return false;
+    	    	}
     }
+    return true;
 }
 
 int UserInterface:: getStoryPart () {
@@ -1378,15 +1418,20 @@ void UserInterface::lag(int n) {
 void UserInterface::beginEnd(int x) {
     if (x == 0) {
         cout << "========================================";
-        cout << "\n\t\t";
+        cout << "\n\t";
         opener("THE ADVENTURES OF OLAF!\n");
         cout << "========================================\n\n";
     }
     if (x == 1) {
         cout << "\n\n";
-//        for(int i = 0; i < achievementRecorder.size(); i++) {
-//            cout << achievementRecorder.at(i) << endl;
-//        }
+        cout << "Achievements:" << endl;
+        for(int i = 0; i < achievementRecorder.size(); i++) {
+            cout << achievementRecorder.at(i) << endl;
+        }
+        cout << "Slain monsters: " << monsterCount << endl;
+        cout << "Total gold pillaged: " << goldCount << endl;
+        cout << "Total loot collected: " << lootCount << endl;
+        cout << "Total time taken: " << timeTaken2 - timeTaken1 << " seconds." << endl;
 
         opener("\n\nCREDITS\n\n");
         cout << "User Interface:";
@@ -1404,25 +1449,23 @@ void UserInterface::beginEnd(int x) {
     }
 }
 
+
+
 int main() {
-    UserInterface UI;
-    UI.beginEnd(0);
-    UI.setStoryPart(0);
-    UI.createStory();
-    //UI.finishLvl(0);
-    //cout << "Test1 before floor 1" << endl;
-    UI.setStoryPart(1);
-    UI.createStory();
-    //UI.finishLvl(1);
-    UI.setStoryPart(2);
-    UI.createStory();
-    //UI.finishLvl(2);
-    UI.setStoryPart(3);
-    UI.createStory();
-    //UI.finishLvl(3);
-    UI.setStoryPart(4);
-    UI.createStory();
-    UI.setStoryPart(5);
-    UI.createStory();
+
+	timeTaken1 = time(0);
+	UserInterface UI;
+	bool alive = true;
+	int i = 0;
+	UI.beginEnd(0);
+
+	while(alive && i <= 5) {
+		UI.setStoryPart(i);
+		alive = UI.createStory();
+		i++;
+
+	}
+
+	timeTaken2 = time(0);
     UI.beginEnd(1);
 }
