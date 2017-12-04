@@ -1,12 +1,12 @@
-#include "floorDesign.h"
-#include "combatSystem.h"
-#include "monsterGeneration.h"
-#include "characterCreation.h"
-#include "userInterface.h"
-#include "floorDesign.cpp"
-#include "combatSystem.cpp"
-#include "monsterGeneration.cpp"
-#include "characterCreation.cpp"
+#include "FloorDesign.h"
+#include "CombatSystem.h"
+#include "MonsterGeneration.h"
+#include "CharacterCreation.h"
+#include "UserInterface.h"
+#include "FloorDesign.cpp"
+#include "CombatSystem.cpp"
+#include "MonsterGeneration.cpp"
+#include "CharacterCreation.cpp"
 
 
 
