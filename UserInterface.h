@@ -14,7 +14,7 @@ private:
 public:
 
     //Creates the story and accesses different parts
-    void createStory ();
+    bool createStory ();
     int getStoryPart ();
     void setStoryPart (int part);
     void finishLvl(int part);
