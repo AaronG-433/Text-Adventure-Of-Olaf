@@ -17,7 +17,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
-#include "characterCreation.h"
+#include "CharacterCreation.h"
 #include <chrono>
 #include <thread>
 #include <climits>
