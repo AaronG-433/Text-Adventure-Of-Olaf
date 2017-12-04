@@ -127,6 +127,8 @@ bool UserInterface:: createStory () {
 	    //possible error in compiling
 	    cout << "Exhausted and beaten, you see a light shining in the distance. Freedom? Safety?\nEven if you ended up in the bottom pits of hell, it would still be better than an endless life of whatever this was, you think...";
             cout << "\n\nEnter c to complete your journey.\n" << endl;
+	    string parta;
+	    string partb;
             while (parta != "c") {
                 cin >> parta;
                 if (parta == "c") {
