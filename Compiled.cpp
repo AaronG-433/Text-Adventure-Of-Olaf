@@ -1460,21 +1460,21 @@ void UserInterface::beginEnd(int x) {
 
 
 
-int main() {
+//int main() {
 
-	timeTaken1 = time(0);
-	UserInterface UI;
-	bool alive = true;
-	int i = 0;
-	UI.beginEnd(0);
+//	timeTaken1 = time(0);
+//	UserInterface UI;
+//	bool alive = true;
+//	int i = 0;
+//	UI.beginEnd(0);
 
-	while(alive && i <= 5) {
-		UI.setStoryPart(i);
-		alive = UI.createStory();
-		i++;
+//	while(alive && i <= 5) {
+//		UI.setStoryPart(i);
+//		alive = UI.createStory();
+//		i++;
 
-	}
+//	}
 
-	timeTaken2 = time(0);
-    UI.beginEnd(1);
-}
+//	timeTaken2 = time(0);
+  //  UI.beginEnd(1);
+//}
