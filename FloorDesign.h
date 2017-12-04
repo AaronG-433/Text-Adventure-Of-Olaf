@@ -17,9 +17,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
-#include "CharacterCreation.h"
-#include "MonsterGeneration.h"
-#include "CombatSystem.h"
+//#include "CharacterCreation.h"
+//#include "MonsterGeneration.h"
+//#include "CombatSystem.h"
 #include <climits>
 using namespace::std;
 
