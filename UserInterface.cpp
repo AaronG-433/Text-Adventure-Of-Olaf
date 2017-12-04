@@ -8,11 +8,11 @@ Player* chooseClass() {
 	int intChoice = 0;
 
 
-	//Needs to be idiot proofed
+	
 	cin >> choice;
 	intChoice = intCheck(choice);
 
-
+	//User chooses hero class to play as
 	Player *hero;
 	switch (intChoice) {
 	case 1:
@@ -33,6 +33,7 @@ Player* chooseClass() {
 	return hero;
 }
 
+//Develops the story as different story parts set outside the function.
 bool UserInterface:: createStory () {
     int part = this->storyPart;
     string partc;
@@ -58,22 +59,20 @@ bool UserInterface:: createStory () {
     //Use on first monster encounter.
     if (part == 1) {
     	string parta = "";
-    	cout << "\n\nYou feel a cool breeze which you decide to follow.\nAs the gusts become more forceful, you spot a spiralling passage into your grim future";
-    	elipsis();
+    	cout << "\n\nYou feel a cool breeze which you decide to follow.\nAs the gusts become more forceful, you spot a spiralling passage into your grim future...";
     	cout << "\n\nEnter c to continue.\n" << endl;
     	while (parta != "c") {
     		cin >> parta;
     	    if (parta == "c") {
     	    	cout << "\nYour hands and face become cold as you move by feeling along the wall for guidance.\nYou finally reach the end only to find another dimly lit room.\nWith a heart full of fear, you attempt to peer through the veil of darkness.\n\n" << endl;
-    	        lag(20);
 
     	    }
     	    else {
     	    	cout << "\nEnter c to encounter your fate.\n" << endl;
     	    }
     	}
+	//starts floor one after internal monologue
     	parta = " ";
-    	//cout << "Test2 Floor 1" << endl;
     	floor = new Floor(1, hero);
     	if(!floor->run()) {
     		return false;
@@ -88,9 +87,8 @@ bool UserInterface:: createStory () {
     	            while (parta != "c") {
     	                cin >> parta;
     	                if (parta == "c") {
-    	                    cout << "\nYou trip on the only stone in the room and stub your toe.\nWith indescribable pain and embarrassment, you trudge onwards to face the inevitable hell that lies ahead.";
-    	                    lag(20);
-    	                    elipsis();
+    	                    cout << "\nYou trip on the only stone in the room and stub your toe.\nWith indescribable pain and embarrassment, you trudge onwards to face the inevitable hell that lies ahead...";
+    	                    
     	                    cout << "\n\n" << endl;
     	                }
     	                else {
@@ -105,16 +103,16 @@ bool UserInterface:: createStory () {
         cout << "";
     } else if (part == 3) {
     	string parta = "";
-    	cout << "Searching your mind for any semblance of a memory, you faintly remember a family...\n Something is there. Something is blocking your memories.\nIt's not amnesia.. It's almost like a presence has hold of your consciousness";
-    	        elipsis();
+    	cout << "Searching your mind for any semblance of a memory, you faintly remember a family...\n Something is there. Something is blocking your memories.\nIt's not amnesia.. It's almost like a presence has hold of your consciousness...";
+    	        
     	        cout << "\n\nEnter c to focus harder.\n\n" << endl;
     	            while (parta != "c") {
     	                cin >> parta;
     	                if (parta == "c") {
-    	                    cout << "\nIt feels like your mind is drowning. You're trying to draw on anything.\nFamily, friends, everyone";
-    	                    elipsis();
+    	                    cout << "\nIt feels like your mind is drowning. You're trying to draw on anything.\nFamily, friends, everyone...";
+    	                   
     	                    cout << " All gone. You don't remember why, but sadness takes over nonetheless.\nYou walk somberly through the unending darkness.\n\n" << endl;
-    	                    lag(20);
+    	                    
     	                }
     	                else if (parta != "c"){
     	                    cout << "\nEnter c to focus your thoughts.\n" << endl;
@@ -126,6 +124,36 @@ bool UserInterface:: createStory () {
     	    		return false;
     	    	}
     } else if (part == 4) {
+	    //possible error in compiling
+	    cout << "Exhausted and beaten, you see a light shining in the distance. Freedom? Safety?\nEven if you ended up in the bottom pits of hell, it would still be better than an endless life of whatever this was, you think...";
+            cout << "\n\nEnter c to complete your journey.\n" << endl;
+            while (parta != "c") {
+                cin >> parta;
+                if (parta == "c") {
+                    cout << "\nA completely empty room?...";
+                    
+                    cout << " This must be a mistake...";
+                   
+                    cout << " Whoever is controlling your fate must be toying with you for their amusement...";
+                    
+                    cout << "\n\nEnter c to focus your thoughts.\n" << endl;
+                    while (partb != "c") {
+                        cin >> partb;
+                        if (partb == "c") {
+                            cout << "\n\nColors shade in from the black ahead. You feel the light, but don't see it directly.\nWhatever is stopping your memory is also blocking your vision. But, soon, everything is revealed";
+                            
+                            cout << "\n\n";
+                        }
+                        else {
+                            cout << "\n\nEnter c to search your mind!" << endl;
+                        }
+                    }
+                }
+                else if (parta != "c") {
+                    cout << "\nEnter c to finish this!\n\n" << endl;
+                }
+            }
+        parta = " ";
     	floor = new Floor(4, hero);
     	if(!floor->run()) {
     	    		return false;
@@ -150,119 +178,8 @@ void UserInterface:: setStoryPart (int part) {
 //*****ADDED******************
 #include <cwchar>
 
-//enter this after each level is finished for specified story part.
-void UserInterface::finishLvl(int part) {
-
-    int v = part;
-
-    string parta;
-    string partb;
-    if (v == 0) {
-//        cout << "\n\nYou feel a cool breeze which you decide to follow.\nAs the gusts become more forceful, you spot a spiralling passage into your grim future";
-//        elipsis();
-//        cout << "\n\nEnter c to continue.\n" << endl;
-//            while (parta != "c") {
-//                cin >> parta;
-//                if (parta == "c") {
-//                    cout << "\nYour hands and face become cold as you move by feeling along the wall for guidance.\nYou finally reach the end only to find another dimly lit room.\nWith a heart full of fear, you attempt to peer through the veil of darkness.\n\n" << endl;
-//                    lag(20);
-//
-//                }
-//                else {
-//                cout << "\nEnter c to encounter your fate.\n" << endl;
-//                }
-//            }
-//        parta = " ";
-    }
-    else if (v == 1) {
-//        cout << "\n\nYou feel power flowing through your veins.\nA surge of excitement takes over as you plunge into the shadows ahead.\n\nEnter c to have your confidence shattered.\n" << endl;
-//            while (parta != "c") {
-//                cin >> parta;
-//                if (parta == "c") {
-//                    cout << "\nYou trip on the only stone in the room and stub your toe.\nWith indescribable pain and embarrassment, you trudge onwards to face the inevitable hell that lies ahead.";
-//                    lag(20);
-//                    elipsis();
-//                    cout << "\n\n" << endl;
-//                }
-//                else {
-//                    cout << "\nEnter c to feel inadequate.\n" << endl;
-//                }
-//            }
-//        parta = " ";
-    }
-    else if (v == 2) {
-//        cout << "Searching your mind for any semblance of a memory, you faintly remember a family...\n Something is there. Something is blocking your memories.\nIt's not amnesia.. It's almost like a presence has hold of your consciousness";
-//        elipsis();
-//        cout << "\n\nEnter c to focus harder.\n\n" << endl;
-//            while (parta != "c") {
-//                cin >> parta;
-//                if (parta == "c") {
-//                    cout << "\nIt feels like your mind is drowning. You're trying to draw on anything.\nFamily, friends, everyone";
-//                    elipsis();
-//                    cout << " All gone. You don't remember why, but sadness takes over nonetheless.\nYou walk somberly through the unending darkness.\n\n" << endl;
-//                    lag(20);
-//                }
-//                else if (parta != "c"){
-//                    cout << "\nEnter c to focus your thoughts.\n" << endl;
-//                }
-//            }
-//        parta = " ";
-    }
-    else if (v == 3) {
-        cout << "Exhausted and beaten, you see a light shining in the distance. Freedom? Safety?\nEven if you ended up in the bottom pits of hell, it would still be better than an endless life of whatever this was, you think";
-        elipsis();
-        lag(20);
-            cout << "\n\nEnter c to complete your journey.\n" << endl;
-            while (parta != "c") {
-                cin >> parta;
-                if (parta == "c") {
-                    cout << "\nA completely empty room?";
-                    elipsis();
-                    cout << " This must be a mistake";
-                    elipsis();
-                    cout << " Whoever is controlling your fate must be toying with you for their amusement";
-                    elipsis();
-                    cout << "\n\nEnter c to focus your thoughts.\n" << endl;
-                    while (partb != "c") {
-                        cin >> partb;
-                        if (partb == "c") {
-                            cout << "\n\nColors shade in from the black ahead. You feel the light, but don't see it directly.\nWhatever is stopping your memory is also blocking your vision. But, soon, everything is revealed";
-                            elipsis();
-                            cout << "\n\n";
-                        }
-                        else {
-                            cout << "\n\nEnter c to search your mind!" << endl;
-                        }
-                    }
-                }
-                else if (parta != "c") {
-                    cout << "\nEnter c to finish this!\n\n" << endl;
-                }
-            }
-        parta = " ";
-    }
-}
-
-void UserInterface::elipsis() {
-    for (int i = 0; i<3;i++) {
-        cout << ".";
-        lag(5);
-    }
-}
-
 void UserInterface::opener(const string& message) {
     cout << message << endl;
-}
-
-//n = 5 for about 1 second and n = 15 for about 4 second break.
-void UserInterface::lag(int n) {
-    int j = 0;
-    //50000000 for 125 millis
-
-    for (int i = 0; i < 1*n; i++) {
-        j++;
-        j--;
-    }
 }
 
 //********EXTRA EXTRA**********************
