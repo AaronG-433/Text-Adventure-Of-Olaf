@@ -19,6 +19,9 @@ int Knight::getDef()
 {
   return this->def;
 }
+void Knight::setDef(int def) {
+	this->def = def;
+}
 int Knight::getCurMana()
 {
   return this->curMana;
@@ -53,6 +56,7 @@ void Knight::lvlUp(int floorLevel)
   this->setMaxHP(this->getMaxHP()+5);
   this->setDmg(this->getDmg() + floorLevel);
   this->setMaxMana(this->getMaxMana() + 5);
+  this->setDef(this->getDef() + 1);
 }
 int Knight::getHealth()
 {
@@ -78,13 +82,13 @@ string Knight::getClass()
 //Skill: returns an int for now, can become its own algorithm though
 int Knight::skill1()
 {
-  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 2) || (curMana < 2)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
   else
   {
-	  cout << "Styleish Spin!" << endl;
+	  cout << "Stylish Spin!" << endl;
      curMana = curMana - 2;
 	   return 2 + ((this->getLvl())*.5) + (this->getDmg());
   }
@@ -92,7 +96,7 @@ int Knight::skill1()
 
 int Knight::skill2()
 {
-  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 3) || (curMana < 4)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -105,7 +109,7 @@ int Knight::skill2()
 }
 int Knight::skill3()
 {
-  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 4) || (curMana < 6)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -119,7 +123,7 @@ int Knight::skill3()
 
 int Knight::skill4()
 {
-  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 5) || (curMana < 8)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -144,6 +148,9 @@ void Archer::setDmg(int dmg)
 int Archer::getDef()
 {
   return this->def;
+}
+void Archer::setDef(int def) {
+	this->def = def;
 }
 int Archer::getCurMana()
 {
@@ -179,6 +186,7 @@ void Archer::lvlUp(int floorLevel)
   this->setMaxHP(this->getMaxHP()+5);
   this->setDmg(this->getDmg() + floorLevel);
   this->setMaxMana(this->getMaxMana() + 5);
+  this->setDef(this->getDef() + 1);
 }
 int Archer::getHealth()
 {
@@ -204,7 +212,7 @@ string Archer::getClass()
 //Skill: returns an int for now, can become its own algorithm though
 int Archer::skill1()
 {
-  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 2) || (curMana < 2)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -218,7 +226,7 @@ int Archer::skill1()
 
 int Archer::skill2()
 {
-  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 3) || (curMana < 4)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -231,7 +239,7 @@ int Archer::skill2()
 }
 int Archer::skill3()
 {
-  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 4) || (curMana < 6)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -246,7 +254,7 @@ int Archer::skill3()
 
 int Archer::skill4()
 {
-  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 5) || (curMana < 8)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -271,6 +279,9 @@ void Caster::setDmg(int  dmg)
 int Caster::getDef()
 {
   return this->def;
+}
+void Caster::setDef(int def) {
+	this->def = def;
 }
 int Caster::getCurMana()
 {
@@ -306,6 +317,7 @@ void Caster::lvlUp(int floorLevel)
   this->setMaxHP(this->getMaxHP()+5);
   this->setDmg(this->getDmg() + floorLevel);
   this->setMaxMana(this->getMaxMana() + 5);
+  this->setDef(this->getDef() + 1);
 }
 int Caster::getHealth()
 {
@@ -331,7 +343,8 @@ string Caster::getClass()
 //Skill: returns an int for now, can become its own algorithm though
 int Caster::skill1()
 {
-  if((this->getLvl() < 2) && (curMana >= 2)) //Check if player is high enough level to use new skill
+
+  if((this->getLvl() < 2) || (curMana < 2)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -345,7 +358,7 @@ int Caster::skill1()
 
 int Caster::skill2()
 {
-  if((this->getLvl() < 3) && (curMana >= 4)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 3) || (curMana < 4)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -358,7 +371,7 @@ int Caster::skill2()
 }
 int Caster::skill3()
 {
-  if((this->getLvl() < 4) && (curMana >= 6)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 4) || (curMana < 6)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -372,7 +385,7 @@ int Caster::skill3()
 
 int Caster::skill4()
 {
-  if((this->getLvl() < 5) && (curMana >= 8)) //Check if player is high enough level to use new skill
+  if((this->getLvl() < 5) || (curMana < 8)) //Check if player is high enough level to use new skill
   {
     return -1;
   }
@@ -382,4 +395,39 @@ int Caster::skill4()
      curMana = curMana - 8;
 	   return 5 + ((this->getLvl())*.5) + (this->getDmg());
   }
+}
+
+
+//Creates the story and accesses different parts
+
+Player* chooseClass() {
+
+	cout << "Choose your class:\n1: Archer\n2: Caster\n3: Knight" << endl;
+	string choice = "";
+	int intChoice = 0;
+
+
+	//Needs to be idiot proofed
+	cin >> choice;
+	intChoice = intCheck(choice);
+
+
+	Player *hero;
+	switch (intChoice) {
+	case 1:
+		hero = new Archer(10, 1, 10, "");
+		break;
+	case 2:
+		hero = new Caster(10, 1, 10, "");
+		break;
+	case 3:
+		hero = new Knight(10, 1, 10, "");
+		break;
+	default:
+		cout << "Invalid Input!" << endl;
+	}
+	achievementRecorder.push_back("Character Created - Doing the bare minimum");
+
+
+	return hero;
 }
