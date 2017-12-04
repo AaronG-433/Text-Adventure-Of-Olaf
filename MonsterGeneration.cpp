@@ -3,7 +3,6 @@ using namespace std;
 
 using namespace std;
 
-//int floorLevel =1;
 
 /*
  *Setters for the monster generation.
