@@ -7,8 +7,8 @@ using namespace std;
 #include <string>
 #include <sstream>
 #include <cctype>
-//#include "FloorDesign.h"
-//#include "CharacterCreation.h"
+#include "FloorDesign.h"
+#include "CharacterCreation.h"
 //#include "MonsterGeneration.h"
 
 
