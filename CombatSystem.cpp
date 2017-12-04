@@ -105,7 +105,7 @@ bool combatSystem(Player* player, monster* mon)
 						break;
 				//getting which skill the user wants and checking if they can wield it
 				case 2:	cout << "Which skill would you like to use?\n Skill [1] for 2 mana, Skill [2] for 4 mana, Skill [3] for 6 mana, or Skill [4] for 8 mana?" << endl;
-						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
+						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 1st skill." << endl;
 						cin >> choice;
 						intChoice = intCheck(choice);
 
