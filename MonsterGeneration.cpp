@@ -1,8 +1,6 @@
 #include "MonsterGeneration.h"
 using namespace std;
 
-using namespace std;
-
 
 /*
  *Setters for the monster generation.
