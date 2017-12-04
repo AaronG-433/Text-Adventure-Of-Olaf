@@ -106,7 +106,7 @@ bool combatSystem(Player* player, monster* mon)
 						charHealth = player->getHealth();
 						break;
 				//getting which skill the user wants and checking if they can wield it
-				case 2:	cout << "Which skill would you like to use?\n Skill 1 for 2 mana, Skill 2 for 4, Skill 3 for 6, or Skill 4 for 8?" << endl;
+				case 2:	cout << "Which skill would you like to use?\n Skill [1] for 2 mana, Skill [2] for 4 mana, Skill [3] for 6 mana, or Skill [4] for 8 mana?" << endl;
 						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
 						cin >> choice;
 						intChoice = intCheck(choice);
@@ -120,7 +120,8 @@ bool combatSystem(Player* player, monster* mon)
 										//check if monster is dead
 										if(monHealth <= 0)
 										{
-										return true;
+
+											return true;
 										}
 										//if not dead then monster hits player
 										cout << "The " << monName << " fights back! Take " << monAttack << " damage." << endl;
@@ -200,6 +201,8 @@ bool combatSystem(Player* player, monster* mon)
 		if(charHealth <= 0)
 		{
 			return false;
+		} else {
+
 		}
 
 	}
@@ -265,7 +268,7 @@ bool combatSystem(Player* player, boss* mon)
 						charHealth = player->getHealth();
 						break;
 				//getting which skill the user wants and checking if they can wield it
-				case 2:	cout << "Which skill would you like to use?\n Skill 1 for 2 mana, Skill 2 for 4, Skill 3 for 6, or Skill 4 for 8?" << endl;
+				case 2:	cout << "Which skill would you like to use?\n Skill [1] for 2 mana, Skill [2] for 4 mana, Skill [3] for 6 mana, or Skill [4] for 8 mana?" << endl;
 						cout << "Warning! You must reach the corresponding floor to use said skill. Ex. Floor 2 to use 2nd skill." << endl;
 						cin >> choice;
 						intChoice = intCheck(choice);
