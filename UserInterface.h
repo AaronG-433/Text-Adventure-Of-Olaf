@@ -3,6 +3,8 @@
 using namespace std;
 #include <string.h>
 #include <chrono>
+#include "FloorDesign.cpp"
+#include "CharacterCreation.cpp"
 
 class UserInterface {
 private:
