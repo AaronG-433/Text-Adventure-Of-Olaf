@@ -20,7 +20,6 @@
 #include "CharacterCreation.h"
 #include "MonsterGeneration.h"
 #include "CombatSystem.h"
-#include <thread>
 #include <climits>
 using namespace::std;
 
