@@ -18,6 +18,11 @@
 #include <iostream>
 #include <ctime>
 #include "CharacterCreation.h"
+#include "CharacterCreation.cpp"
+#include "MonsterGeneration.h"
+#include "MonsterGeneration.cpp"
+#include "CombatSystem.h"
+#include "CombatSystem.cpp"
 #include <chrono>
 #include <thread>
 #include <climits>
