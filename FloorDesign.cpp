@@ -1,77 +1,30 @@
 #include "FloorDesign.h"
 using namespace std;
 
-
-//Will also take the character as a parameter
+//Takes floor level and player as parameters
 Floor::Floor(int level, Player* hero) {
 	this->level = level;
 	this->hero = hero;
-	//cout << "Floor constructor" << endl;
-	//cout << hero->getHealth() << endl;
-
-
+	
 }
 
-//bool Floor::run() {
-//	bool fail = false;
-//	int outcome = 0;
-//	//int loot = 0;
-//	if(this->runShop()) {
-//		if(level < 5) {
-//			for(int i=0; i<level*2; i++) {
-//				outcome = rand()%10;
-//				if(outcome >= 0 && outcome < 5) {
-//					if(!this->runMonster()) {
-//						fail = true;
-//						return false;
-//						break;
-//					}
-//
-//				} else if(outcome >= 5 && outcome < 9) {
-//					this->runLoot();
-//				} else if(outcome == 9) {
-//					this->runNothing();
-//				}
-//			}
-//			if(!fail) {
-//				this->runStairs();
-//			}
-//		} else if(level == 5) {
-//			if(!this->runBoss()) {
-//				return false;
-//			}
-//
-//		}
-//	} else {
-//		return false;
-//	}
-//
-//	return true;
-//
-//}
-
 bool Floor::run() {
-
-	//cout << hero->getHealth() << endl;
-
-	//cout << "In health check" << endl;
-	//cout << hero->getHealth() << endl;
+	
+	//Check hero health
 	if(hero->getHealth() <= 0) {
-
 		return false;
 	}
 	bool fail = true;
 	int outcome = 0;
 
 	time_t timer;
-	//int loot = 0;
-	//Run shop and check if the method runs
+	
 
 	//If not the boss level
-
 	if(level < 5) {
 		//Run through each room
 		for(int i=0; i<level*2; i++) {
+			//Check hero health
 			if(hero->getHealth() <= 0) {
 				return false;
 			}
@@ -85,7 +38,7 @@ bool Floor::run() {
 			outcome = rand()%10;
 
 			if(outcome >= 0 && outcome < 5 && fail) {
-				//Call monster method and check if they survived
+				//50%: Call monster method and check if they survived
 				fail = this->runMonster();
 				if(!fail) {
 					//fail = true;
@@ -95,10 +48,10 @@ bool Floor::run() {
 
 				}
 
-				//Run loot method
+				//40%: Run loot method
 			} else if(outcome >= 5 && outcome < 9 && fail) {
 				this->runLoot();
-				//Run nothing method
+				//10%: Run nothing method
 			} else if(outcome == 9 && fail) {
 				this->runNothing();
 			}
@@ -108,9 +61,9 @@ bool Floor::run() {
 			this->runStairs();
 		}
 		//If it is the boss level, run the boss method
-
 	}
 	if(this->level == 5) {
+		//Call boss method and check if they survive
 		if(!this->runBoss()) {
 			return false;
 		}
@@ -124,12 +77,6 @@ bool Floor::run() {
 	}
 	return true;
 
-}
-
-//Unused
-bool Floor::runShop() {
-	//call store class
-	return true;
 }
 
 //Run end floor text and level up/heal hero
@@ -150,6 +97,7 @@ void Floor::runStairs() {
 		cin >> choice;
 	} while(choice != 'c');
 
+	//Achievement Check
 	if(this->level == 4) {
 		char partc;
 
@@ -164,28 +112,25 @@ void Floor::runStairs() {
 	}
 }
 
-//Run monster room event
+//Run monster room event, return true if successful, false if death
 bool Floor::runMonster() {
 	//Create monster
 	monster* monst = new monster(this->level);
 
-//	monst->setHP(this->level);
-//	monst->setDAMAGE(this->level);
-//	monst->setDEFENSE(this->level);
-//	monst->setLOOT();
-
 	cout << "A " << monst->getMONSTER()
 			<< " has appeared! It moves to attack you.  Defend yourself!" << endl;
 
-
+	//Call combat system and check if they survive
 	if(combatSystem(this->hero, monst)) {
-		cout << "Monster slain" << endl;
+		
+		//Increment monster slain count
 		monsterCount++;
 		cout << "You have defeated the monster! Most impressive." << endl;
 		cout << "You find " << monst->getLOOT() << " loot on the monster's corpse.  Well earned." << endl;
 		cout << "You move on with " << hero->getHealth() << " health and " << hero->getCurMana() << " mana." << endl;
+		//Incrememt Loot count
 		lootCount += monst->getLOOT();
-		//std::chrono::duration<int, std::milli> timespan(1000);
+	
 		char choice;
 		do {
 			cout << "Press c to continue." << endl;
@@ -195,7 +140,7 @@ bool Floor::runMonster() {
 	} else {
 		//If fail
 		cout << "You have been killed.  The monster feeds on your lifeless corpse..." << endl;
-		//std::chrono::duration<int, std::milli> timespan(1000);
+		
 		char choice;
 		do {
 			cout << "Press c to continue...to the afterlife" << endl;
@@ -203,15 +148,11 @@ bool Floor::runMonster() {
 		} while(choice != 'c');
 		return false;
 	}
-
-
-
-	//Return true if successful, false if death
-	//return true;
 }
 
-//Unused?
+
 void Floor::runLoot() {
+	//Randomly generate loot
 	time_t timer;
 	time(&timer);
 	srand(timer);
@@ -220,10 +161,7 @@ void Floor::runLoot() {
 	cout << "You cautiously enter the room, but only find a simple unassuming chest. "
 			<< "You open the chest to find " << loot << " gold coins! "
 					 << "You take it and run." << endl;
-	//Store loot
-
-	//std::chrono::duration<int, std::milli> timespan(1000);
-	//sleep_for(std::chrono::seconds(1));
+	
 	char choice;
 	do {
 		cout << "Press c to continue." << endl;
@@ -236,7 +174,7 @@ void Floor::runNothing() {
 	cout << "You bust down the door ready to fight!" << endl;
 	cout << "....\n...\nBut nothing happens?" << endl;
 	cout << "You continue on, confused and slightly disappointed." << endl;
-	//std::chrono::duration<int, std::milli> timespan(1000);
+	
 	char choice;
 	do {
 		cout << "Press c to continue." << endl;
@@ -244,11 +182,10 @@ void Floor::runNothing() {
 	} while(choice != 'c');
 }
 
-//Run boss battle
+//Run boss battle, return true if success, false if death
 bool Floor::runBoss() {
 	//Create boss
 	boss* Olaf = new boss();
-	//Olaf = boss();
 
 	cout << "You crack open the door and peak through, seeing only darkness." << endl;
 	cout << "Suddenly, the door is pulled open, and you are pulled into the chamber and thrown against the opposite wall!" << endl;
@@ -256,7 +193,7 @@ bool Floor::runBoss() {
 	cout << "Shaken, you raise your weapon and prepare for the fight of your life." << endl;
 	cout << "...Good luck.  You'll need it." << endl;
 
-	//run combat
+	//run combat, check for survival
 	if (combatSystem(this->hero, Olaf)) {
 		//If Victory (lol)
 		cout << "You have apparently hacked the game.  Well done I suppose.  Take your loot and get out." << endl;
@@ -269,7 +206,7 @@ bool Floor::runBoss() {
 		cout << "You vision goes dark as your life fades, and you lay defeated at the foot of the monster, thankful for the release of death." << endl;
 		return false;
 	}
-	//return true if success, false if death
+	
 	return true;
 
 }
